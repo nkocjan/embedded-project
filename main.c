@@ -13,6 +13,19 @@
 
 #define LCD_ILI9325 1
 
+// ----- PINY -----
+/* 
+kolumny -> pin P1_28 P1_26 P1_24 P1_22 
+					 col 1		 2		 3 		 4
+wiersze -> pin P1_29 P1_27 P1_25 P1_23
+					 wie 1     2     3     4
+
+
+OS X krotsza
+
+*/
+
+
 struct Point{
     int x;
     int y;
@@ -71,11 +84,31 @@ void myUART_Thread(const void *args) {
     }
 }
 
-void initalizeDISPLAY(){
-    LPC_GPIOINT->IO0IntEnF = (1 << 19);
-    NVIC_EnableIRQ(EINT3_IRQn);
+void initializeKeyboard(){
+	// rows
+	LPC_GPIO1->FIODIR |= 1 << 29;
+	LPC_GPIO1->FIODIR |= 1 << 27;
+	LPC_GPIO1->FIODIR |= 1 << 25;
+	LPC_GPIO1->FIODIR |= 1 << 23;
+	// cols
+	LPC_GPIO1->FIODIR |= 1 << 28; 
+	LPC_GPIO1->FIODIR |= 1 << 26;
+	LPC_GPIO1->FIODIR |= 1 << 24;
+	LPC_GPIO1->FIODIR |= 1 << 22;
+	
+	LPC_GPIO1->FIOSET |= 1 << 29;
+	LPC_GPIO1->FIOSET |= 1 << 27;
+	LPC_GPIO1->FIOSET |= 1 << 25;
+	LPC_GPIO1->FIOSET |= 1 << 23;
+	
+	LPC_GPIO1->FIOSET |= 1 << 28;
+	LPC_GPIO1->FIOSET |= 1 << 26;
+	LPC_GPIO1->FIOSET |= 1 << 24;
+	LPC_GPIO1->FIOSET |= 1 << 22;
+	
+	LPC_GPIOINT->IO0IntEnF = 1 << 29 | 1 << 27 | 1 << 25 | 1 << 23 | 1 << 28 | 1 << 26 | 1 << 24 | 1 << 22;
+  NVIC_EnableIRQ(EINT3_IRQn);
 }
-
 
 // Inicjacja konfiguracji LCD
 // wysylanie danych na UART
@@ -95,9 +128,12 @@ void initLcdConfiguration(){
 // INICJALIZACJA
 void initialize() {
     SysTick_Config(SystemCoreClock / 1000);
-    initalizeDISPLAY();
     initLcdConfiguration();
     touchpanelInit();
+	
+		// init GPIO
+		initializeKeyboard();
+	
     USARTdrv->Initialize(NULL);
     USARTdrv->PowerControl(ARM_POWER_FULL);
     USARTdrv->Control(ARM_USART_MODE_ASYNCHRONOUS |
@@ -144,6 +180,8 @@ void EINT0_IRQHandler(){
     }
     LPC_SC->EXTINT = 1;
 }
+
+
 
 void firePixel(int x, int y, int color){
     lcdWriteReg(ADRX_RAM, x);
@@ -296,11 +334,12 @@ void draw_keyboard(){
     drawLine(p1, p2);
 }
 
+void EINT3_IRQHandler(){
+	draw_keyboard();
+}
 
 int main(void){
     initialize();
 		setAutoIncrementBackground();
-    draw_keyboard();
-
     while(1){}
 }
