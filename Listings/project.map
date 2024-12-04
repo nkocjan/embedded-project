@@ -1,0 +1,1114 @@
+Component: ARM Compiler 5.06 update 6 (build 750) Tool: armlink [4d35ed]
+
+==============================================================================
+
+Section Cross References
+
+    main.o(i.EINT0_IRQHandler) refers to main.o(i.UART_SEND) for UART_SEND
+    main.o(i.EINT0_IRQHandler) refers to main.o(.data) for led
+    main.o(i.RTC_IRQHandler) refers to main.o(i.UART_SEND) for UART_SEND
+    main.o(i.RTC_IRQHandler) refers to main.o(.data) for tikTak
+    main.o(i.SysTick_Handler) refers to main.o(.data) for msTicks
+    main.o(i.TIMER0_IRQHandler) refers to main.o(i.UART_SEND) for UART_SEND
+    main.o(i.UART_SEND) refers to main.o(.data) for USARTdrv
+    main.o(i.debounceButton) refers to main.o(.data) for msTicks
+    main.o(i.drawLetter) refers to asciilib.o(i.GetASCIICode) for GetASCIICode
+    main.o(i.drawLetter) refers to main.o(i.firePixel) for firePixel
+    main.o(i.drawLine) refers to main.o(i.firePixel) for firePixel
+    main.o(i.drawString) refers to main.o(i.drawLetter) for drawLetter
+    main.o(i.draw_keyboard) refers to main.o(i.drawLine) for drawLine
+    main.o(i.firePixel) refers to open1768_lcd.o(i.lcdWriteReg) for lcdWriteReg
+    main.o(i.initLcdConfiguration) refers to open1768_lcd.o(i.lcdConfiguration) for lcdConfiguration
+    main.o(i.initLcdConfiguration) refers to open1768_lcd.o(i.lcdReadReg) for lcdReadReg
+    main.o(i.initLcdConfiguration) refers to main.o(i.UART_SEND) for UART_SEND
+    main.o(i.initLcdConfiguration) refers to lcd_ili9325.o(i.init_ILI9325) for init_ILI9325
+    main.o(i.initalizeDISPLAY) refers to main.o(i.__NVIC_EnableIRQ) for __NVIC_EnableIRQ
+    main.o(i.initialize) refers to main.o(i.initalizeDISPLAY) for initalizeDISPLAY
+    main.o(i.initialize) refers to main.o(i.initLcdConfiguration) for initLcdConfiguration
+    main.o(i.initialize) refers to tp_open1768.o(i.touchpanelInit) for touchpanelInit
+    main.o(i.initialize) refers to system_lpc17xx.o(.data) for SystemCoreClock
+    main.o(i.initialize) refers to main.o(.data) for USARTdrv
+    main.o(i.initializeRTC) refers to main.o(i.__NVIC_EnableIRQ) for __NVIC_EnableIRQ
+    main.o(i.main) refers to main.o(i.initialize) for initialize
+    main.o(i.main) refers to main.o(i.setAutoIncrementBackground) for setAutoIncrementBackground
+    main.o(i.main) refers to main.o(i.draw_keyboard) for draw_keyboard
+    main.o(i.myUART_Thread) refers to main.o(.data) for USARTdrv
+    main.o(i.setAutoIncrementBackground) refers to open1768_lcd.o(i.lcdWriteReg) for lcdWriteReg
+    main.o(i.setAutoIncrementBackground) refers to open1768_lcd.o(i.lcdWriteIndex) for lcdWriteIndex
+    main.o(i.setAutoIncrementBackground) refers to open1768_lcd.o(i.lcdWriteData) for lcdWriteData
+    main.o(.data) refers to uart_lpc17xx.o(.constdata) for Driver_USART1
+    asciilib.o(i.GetASCIICode) refers to rt_memcpy_v6.o(.text) for __aeabi_memcpy
+    asciilib.o(i.GetASCIICode) refers to asciilib.o(.constdata) for AsciiLib
+    lcd_ili9325.o(i.init_ILI9325) refers to open1768_lcd.o(i.lcdWriteReg) for lcdWriteReg
+    lcd_ili9325.o(i.init_ILI9325) refers to lcd_ili9325.o(i.delay_ms) for delay_ms
+    open1768_lcd.o(i.lcdRead) refers to open1768_lcd.o(i.wait_delay) for wait_delay
+    open1768_lcd.o(i.lcdReadData) refers to open1768_lcd.o(i.wait_delay) for wait_delay
+    open1768_lcd.o(i.lcdReadData) refers to open1768_lcd.o(i.lcdRead) for lcdRead
+    open1768_lcd.o(i.lcdReadReg) refers to open1768_lcd.o(i.lcdWriteIndex) for lcdWriteIndex
+    open1768_lcd.o(i.lcdReadReg) refers to open1768_lcd.o(i.lcdReadData) for lcdReadData
+    open1768_lcd.o(i.lcdSetCursor) refers to open1768_lcd.o(i.lcdWriteReg) for lcdWriteReg
+    open1768_lcd.o(i.lcdWriteData) refers to open1768_lcd.o(i.lcdSend) for lcdSend
+    open1768_lcd.o(i.lcdWriteData) refers to open1768_lcd.o(i.wait_delay) for wait_delay
+    open1768_lcd.o(i.lcdWriteIndex) refers to open1768_lcd.o(i.lcdSend) for lcdSend
+    open1768_lcd.o(i.lcdWriteIndex) refers to open1768_lcd.o(i.wait_delay) for wait_delay
+    open1768_lcd.o(i.lcdWriteReg) refers to open1768_lcd.o(i.lcdWriteIndex) for lcdWriteIndex
+    open1768_lcd.o(i.lcdWriteReg) refers to open1768_lcd.o(i.lcdWriteData) for lcdWriteData
+    tp_open1768.o(i.touchpanelGetXY) refers to tp_open1768.o(i.touchpanelReadX) for touchpanelReadX
+    tp_open1768.o(i.touchpanelGetXY) refers to tp_open1768.o(i.touchpanelDelayUS) for touchpanelDelayUS
+    tp_open1768.o(i.touchpanelGetXY) refers to tp_open1768.o(i.touchpanelReadY) for touchpanelReadY
+    tp_open1768.o(i.touchpanelInit) refers to tp_open1768.o(i.touchpanelDriverDataBusInit) for touchpanelDriverDataBusInit
+    tp_open1768.o(i.touchpanelReadAddress) refers to tp_open1768.o(i.touchpanelWriteCmd) for touchpanelWriteCmd
+    tp_open1768.o(i.touchpanelReadAddress) refers to tp_open1768.o(i.touchpanelDelayUS) for touchpanelDelayUS
+    tp_open1768.o(i.touchpanelReadX) refers to tp_open1768.o(i.touchpanelDelayUS) for touchpanelDelayUS
+    tp_open1768.o(i.touchpanelReadX) refers to tp_open1768.o(i.touchpanelWriteCmd) for touchpanelWriteCmd
+    tp_open1768.o(i.touchpanelReadX) refers to tp_open1768.o(i.touchpanelReadAddress) for touchpanelReadAddress
+    tp_open1768.o(i.touchpanelReadY) refers to tp_open1768.o(i.touchpanelDelayUS) for touchpanelDelayUS
+    tp_open1768.o(i.touchpanelReadY) refers to tp_open1768.o(i.touchpanelWriteCmd) for touchpanelWriteCmd
+    tp_open1768.o(i.touchpanelReadY) refers to tp_open1768.o(i.touchpanelReadAddress) for touchpanelReadAddress
+    buttons_open1768.o(i.Buttons_GetState) refers to gpio_lpc17xx.o(i.GPIO_PinRead) for GPIO_PinRead
+    buttons_open1768.o(i.Buttons_GetState) refers to buttons_open1768.o(.constdata) for BUTTON_PIN
+    buttons_open1768.o(i.Buttons_Initialize) refers to gpio_lpc17xx.o(i.GPIO_PortClock) for GPIO_PortClock
+    buttons_open1768.o(i.Buttons_Initialize) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    buttons_open1768.o(i.Buttons_Initialize) refers to gpio_lpc17xx.o(i.GPIO_SetDir) for GPIO_SetDir
+    buttons_open1768.o(i.Buttons_Initialize) refers to buttons_open1768.o(.constdata) for BUTTON_PIN
+    buttons_open1768.o(i.Buttons_Uninitialize) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    buttons_open1768.o(i.Buttons_Uninitialize) refers to buttons_open1768.o(.constdata) for BUTTON_PIN
+    led_open1768.o(i.LED_Initialize) refers to gpio_lpc17xx.o(i.GPIO_PortClock) for GPIO_PortClock
+    led_open1768.o(i.LED_Initialize) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    led_open1768.o(i.LED_Initialize) refers to gpio_lpc17xx.o(i.GPIO_SetDir) for GPIO_SetDir
+    led_open1768.o(i.LED_Initialize) refers to gpio_lpc17xx.o(i.GPIO_PinWrite) for GPIO_PinWrite
+    led_open1768.o(i.LED_Initialize) refers to led_open1768.o(.constdata) for LED_PIN
+    led_open1768.o(i.LED_Off) refers to gpio_lpc17xx.o(i.GPIO_PinWrite) for GPIO_PinWrite
+    led_open1768.o(i.LED_Off) refers to led_open1768.o(.constdata) for LED_PIN
+    led_open1768.o(i.LED_On) refers to gpio_lpc17xx.o(i.GPIO_PinWrite) for GPIO_PinWrite
+    led_open1768.o(i.LED_On) refers to led_open1768.o(.constdata) for LED_PIN
+    led_open1768.o(i.LED_SetOut) refers to led_open1768.o(i.LED_On) for LED_On
+    led_open1768.o(i.LED_SetOut) refers to led_open1768.o(i.LED_Off) for LED_Off
+    led_open1768.o(i.LED_Uninitialize) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    led_open1768.o(i.LED_Uninitialize) refers to led_open1768.o(.constdata) for LED_PIN
+    uart_lpc17xx.o(i.GetUsartClockFreq) refers to system_lpc17xx.o(.data) for SystemCoreClock
+    uart_lpc17xx.o(i.UART1_IRQHandler) refers to uart_lpc17xx.o(i.USART_IRQHandler) for USART_IRQHandler
+    uart_lpc17xx.o(i.UART1_IRQHandler) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_Control) refers to uart_lpc17xx.o(i.USART_Control) for USART_Control
+    uart_lpc17xx.o(i.USART1_Control) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GPDMA_Rx_Event) refers to uart_lpc17xx.o(i.USART_GPDMA_Rx_Event) for USART_GPDMA_Rx_Event
+    uart_lpc17xx.o(i.USART1_GPDMA_Rx_Event) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GPDMA_Tx_Event) refers to uart_lpc17xx.o(i.USART_GPDMA_Tx_Event) for USART_GPDMA_Tx_Event
+    uart_lpc17xx.o(i.USART1_GPDMA_Tx_Event) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GetCapabilities) refers to uart_lpc17xx.o(i.USART_GetCapabilities) for USART_GetCapabilities
+    uart_lpc17xx.o(i.USART1_GetCapabilities) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GetModemStatus) refers to uart_lpc17xx.o(i.USART_GetModemStatus) for USART_GetModemStatus
+    uart_lpc17xx.o(i.USART1_GetModemStatus) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GetRxCount) refers to uart_lpc17xx.o(i.USART_GetRxCount) for USART_GetRxCount
+    uart_lpc17xx.o(i.USART1_GetRxCount) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GetStatus) refers to uart_lpc17xx.o(i.USART_GetStatus) for USART_GetStatus
+    uart_lpc17xx.o(i.USART1_GetStatus) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_GetTxCount) refers to uart_lpc17xx.o(i.USART_GetTxCount) for USART_GetTxCount
+    uart_lpc17xx.o(i.USART1_GetTxCount) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_Initialize) refers to uart_lpc17xx.o(i.USART_Initialize) for USART_Initialize
+    uart_lpc17xx.o(i.USART1_Initialize) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_PowerControl) refers to uart_lpc17xx.o(i.USART_PowerControl) for USART_PowerControl
+    uart_lpc17xx.o(i.USART1_PowerControl) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_Receive) refers to uart_lpc17xx.o(i.USART_Receive) for USART_Receive
+    uart_lpc17xx.o(i.USART1_Receive) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_Send) refers to uart_lpc17xx.o(i.USART_Send) for USART_Send
+    uart_lpc17xx.o(i.USART1_Send) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_SetModemControl) refers to uart_lpc17xx.o(i.USART_SetModemControl) for USART_SetModemControl
+    uart_lpc17xx.o(i.USART1_SetModemControl) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_Transfer) refers to uart_lpc17xx.o(i.USART_Transfer) for USART_Transfer
+    uart_lpc17xx.o(i.USART1_Transfer) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART1_Uninitialize) refers to uart_lpc17xx.o(i.USART_Uninitialize) for USART_Uninitialize
+    uart_lpc17xx.o(i.USART1_Uninitialize) refers to uart_lpc17xx.o(.constdata) for USART1_Resources
+    uart_lpc17xx.o(i.USART_Control) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    uart_lpc17xx.o(i.USART_Control) refers to gpdma_lpc17xx.o(i.GPDMA_ChannelDisable) for GPDMA_ChannelDisable
+    uart_lpc17xx.o(i.USART_Control) refers to uart_lpc17xx.o(i.GetUsartClockFreq) for GetUsartClockFreq
+    uart_lpc17xx.o(i.USART_Control) refers to uart_lpc17xx.o(i.USART_SetBaudrate) for USART_SetBaudrate
+    uart_lpc17xx.o(i.USART_GetRxCount) refers to gpdma_lpc17xx.o(i.GPDMA_ChannelGetCount) for GPDMA_ChannelGetCount
+    uart_lpc17xx.o(i.USART_GetTxCount) refers to gpdma_lpc17xx.o(i.GPDMA_ChannelGetCount) for GPDMA_ChannelGetCount
+    uart_lpc17xx.o(i.USART_IRQHandler) refers to uart_lpc17xx.o(i.USART_RxLineIntHandler) for USART_RxLineIntHandler
+    uart_lpc17xx.o(i.USART_Initialize) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    uart_lpc17xx.o(i.USART_Initialize) refers to gpdma_lpc17xx.o(i.GPDMA_Initialize) for GPDMA_Initialize
+    uart_lpc17xx.o(i.USART_PowerControl) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    uart_lpc17xx.o(i.USART_PowerControl) refers to gpdma_lpc17xx.o(i.GPDMA_ChannelDisable) for GPDMA_ChannelDisable
+    uart_lpc17xx.o(i.USART_PowerControl) refers to uart_lpc17xx.o(i.__NVIC_ClearPendingIRQ) for __NVIC_ClearPendingIRQ
+    uart_lpc17xx.o(i.USART_Receive) refers to gpdma_lpc17xx.o(i.GPDMA_PeripheralSelect) for GPDMA_PeripheralSelect
+    uart_lpc17xx.o(i.USART_Receive) refers to gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure) for GPDMA_ChannelConfigure
+    uart_lpc17xx.o(i.USART_Receive) refers to uart_lpc17xx.o(i.USART_Send) for USART_Send
+    uart_lpc17xx.o(i.USART_Send) refers to uart_lpc17xx.o(i.USART_Receive) for USART_Receive
+    uart_lpc17xx.o(i.USART_Send) refers to gpdma_lpc17xx.o(i.GPDMA_PeripheralSelect) for GPDMA_PeripheralSelect
+    uart_lpc17xx.o(i.USART_Send) refers to gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure) for GPDMA_ChannelConfigure
+    uart_lpc17xx.o(i.USART_SetBaudrate) refers to uart_lpc17xx.o(i.GetUsartClockFreq) for GetUsartClockFreq
+    uart_lpc17xx.o(i.USART_SetBaudrate) refers to lludivv7m.o(.text) for __aeabi_uldivmod
+    uart_lpc17xx.o(i.USART_SetBaudrate) refers to uart_lpc17xx.o(.constdata) for fract_div_lookup_table
+    uart_lpc17xx.o(i.USART_Transfer) refers to uart_lpc17xx.o(i.USART_Receive) for USART_Receive
+    uart_lpc17xx.o(i.USART_Transfer) refers to uart_lpc17xx.o(i.USART_Send) for USART_Send
+    uart_lpc17xx.o(i.USART_Uninitialize) refers to pin_lpc17xx.o(i.PIN_Configure) for PIN_Configure
+    uart_lpc17xx.o(i.USART_Uninitialize) refers to gpdma_lpc17xx.o(i.GPDMA_Uninitialize) for GPDMA_Uninitialize
+    uart_lpc17xx.o(i.USARTx_GetVersion) refers to uart_lpc17xx.o(.constdata) for usart_driver_version
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GPDMA_Tx_Event) for USART1_GPDMA_Tx_Event
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GPDMA_Rx_Event) for USART1_GPDMA_Rx_Event
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(.bss) for USART1_Info
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USARTx_GetVersion) for USARTx_GetVersion
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GetCapabilities) for USART1_GetCapabilities
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_Initialize) for USART1_Initialize
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_Uninitialize) for USART1_Uninitialize
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_PowerControl) for USART1_PowerControl
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_Send) for USART1_Send
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_Receive) for USART1_Receive
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_Transfer) for USART1_Transfer
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GetTxCount) for USART1_GetTxCount
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GetRxCount) for USART1_GetRxCount
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_Control) for USART1_Control
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GetStatus) for USART1_GetStatus
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_SetModemControl) for USART1_SetModemControl
+    uart_lpc17xx.o(.constdata) refers to uart_lpc17xx.o(i.USART1_GetModemStatus) for USART1_GetModemStatus
+    gpdma_lpc17xx.o(i.Clear_Channel_active_flag) refers to gpdma_lpc17xx.o(.data) for Channel_active
+    gpdma_lpc17xx.o(i.DMA_IRQHandler) refers to gpdma_lpc17xx.o(i.Clear_Channel_active_flag) for Clear_Channel_active_flag
+    gpdma_lpc17xx.o(i.DMA_IRQHandler) refers to gpdma_lpc17xx.o(.bss) for Channel_info
+    gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure) refers to gpdma_lpc17xx.o(i.Set_Channel_active_flag) for Set_Channel_active_flag
+    gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure) refers to gpdma_lpc17xx.o(i.Clear_Channel_active_flag) for Clear_Channel_active_flag
+    gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure) refers to gpdma_lpc17xx.o(.bss) for Channel_info
+    gpdma_lpc17xx.o(i.GPDMA_ChannelDisable) refers to gpdma_lpc17xx.o(i.Clear_Channel_active_flag) for Clear_Channel_active_flag
+    gpdma_lpc17xx.o(i.GPDMA_ChannelEnable) refers to gpdma_lpc17xx.o(i.Set_Channel_active_flag) for Set_Channel_active_flag
+    gpdma_lpc17xx.o(i.GPDMA_ChannelGetCount) refers to gpdma_lpc17xx.o(.bss) for Channel_info
+    gpdma_lpc17xx.o(i.GPDMA_ChannelGetStatus) refers to gpdma_lpc17xx.o(.data) for Channel_active
+    gpdma_lpc17xx.o(i.GPDMA_Initialize) refers to gpdma_lpc17xx.o(i.__NVIC_ClearPendingIRQ) for __NVIC_ClearPendingIRQ
+    gpdma_lpc17xx.o(i.GPDMA_Initialize) refers to gpdma_lpc17xx.o(.data) for Init_cnt
+    gpdma_lpc17xx.o(i.GPDMA_Initialize) refers to gpdma_lpc17xx.o(.bss) for Channel_info
+    gpdma_lpc17xx.o(i.GPDMA_Uninitialize) refers to gpdma_lpc17xx.o(i.__NVIC_ClearPendingIRQ) for __NVIC_ClearPendingIRQ
+    gpdma_lpc17xx.o(i.GPDMA_Uninitialize) refers to gpdma_lpc17xx.o(.data) for Init_cnt
+    gpdma_lpc17xx.o(i.Set_Channel_active_flag) refers to gpdma_lpc17xx.o(.data) for Channel_active
+    startup_lpc17xx.o(STACK) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_lpc17xx.o(HEAP) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_lpc17xx.o(RESET) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_lpc17xx.o(RESET) refers to startup_lpc17xx.o(STACK) for __initial_sp
+    startup_lpc17xx.o(RESET) refers to startup_lpc17xx.o(.text) for Reset_Handler
+    startup_lpc17xx.o(RESET) refers to main.o(i.SysTick_Handler) for SysTick_Handler
+    startup_lpc17xx.o(RESET) refers to main.o(i.TIMER0_IRQHandler) for TIMER0_IRQHandler
+    startup_lpc17xx.o(RESET) refers to uart_lpc17xx.o(i.UART1_IRQHandler) for UART1_IRQHandler
+    startup_lpc17xx.o(RESET) refers to main.o(i.RTC_IRQHandler) for RTC_IRQHandler
+    startup_lpc17xx.o(RESET) refers to main.o(i.EINT0_IRQHandler) for EINT0_IRQHandler
+    startup_lpc17xx.o(RESET) refers to gpdma_lpc17xx.o(i.DMA_IRQHandler) for DMA_IRQHandler
+    startup_lpc17xx.o(.ARM.__at_0x02FC) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_lpc17xx.o(.text) refers (Special) to heapauxi.o(.text) for __use_two_region_memory
+    startup_lpc17xx.o(.text) refers to system_lpc17xx.o(i.SystemInit) for SystemInit
+    startup_lpc17xx.o(.text) refers to __main.o(!!!main) for __main
+    startup_lpc17xx.o(.text) refers to startup_lpc17xx.o(HEAP) for Heap_Mem
+    startup_lpc17xx.o(.text) refers to startup_lpc17xx.o(STACK) for Stack_Mem
+    system_lpc17xx.o(i.SystemCoreClockUpdate) refers to lludivv7m.o(.text) for __aeabi_uldivmod
+    system_lpc17xx.o(i.SystemCoreClockUpdate) refers to system_lpc17xx.o(.data) for SystemCoreClock
+    rt_memcpy_v6.o(.text) refers to rt_memcpy_w.o(.text) for __aeabi_memcpy4
+    __main.o(!!!main) refers to __rtentry.o(.ARM.Collect$$rtentry$$00000000) for __rt_entry
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for __rt_entry_li
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for __rt_entry_main
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$0000000C) for __rt_entry_postli_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$00000009) for __rt_entry_postsh_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry2.o(.ARM.Collect$$rtentry$$00000002) for __rt_entry_presh_1
+    __rtentry.o(.ARM.Collect$$rtentry$$00000000) refers (Special) to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for __rt_entry_sh
+    aeabi_ldiv0_sigfpe.o(.text) refers to rt_div0.o(.text) for __rt_div0
+    __rtentry2.o(.ARM.Collect$$rtentry$$00000008) refers to boardinit2.o(.text) for _platform_post_stackheap_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) refers to libinit.o(.ARM.Collect$$libinit$$00000000) for __rt_lib_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) refers to boardinit3.o(.text) for _platform_post_lib_init
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to main.o(i.main) for main
+    __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) refers to exit.o(.text) for exit
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000001) for .ARM.Collect$$rtentry$$00000001
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$00000008) for .ARM.Collect$$rtentry$$00000008
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000A) for .ARM.Collect$$rtentry$$0000000A
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000B) for .ARM.Collect$$rtentry$$0000000B
+    __rtentry2.o(.ARM.exidx) refers to __rtentry2.o(.ARM.Collect$$rtentry$$0000000D) for .ARM.Collect$$rtentry$$0000000D
+    __rtentry4.o(.ARM.Collect$$rtentry$$00000004) refers to sys_stackheap_outer.o(.text) for __user_setup_stackheap
+    __rtentry4.o(.ARM.exidx) refers to __rtentry4.o(.ARM.Collect$$rtentry$$00000004) for .ARM.Collect$$rtentry$$00000004
+    rt_div0.o(.text) refers to defsig_fpe_outer.o(.text) for __rt_SIGFPE
+    sys_stackheap_outer.o(.text) refers to libspace.o(.text) for __user_perproc_libspace
+    sys_stackheap_outer.o(.text) refers to startup_lpc17xx.o(.text) for __user_initial_stackheap
+    exit.o(.text) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for __rt_exit
+    defsig_fpe_outer.o(.text) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig_fpe_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_fpe_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002E) for __rt_lib_init_alloca_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000002C) for __rt_lib_init_argv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001B) for __rt_lib_init_atexit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000021) for __rt_lib_init_clock_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000032) for __rt_lib_init_cpp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000030) for __rt_lib_init_exceptions_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000002) for __rt_lib_init_fp_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001F) for __rt_lib_init_fp_trap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000023) for __rt_lib_init_getenv_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000A) for __rt_lib_init_heap_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000011) for __rt_lib_init_lc_collate_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000013) for __rt_lib_init_lc_ctype_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000015) for __rt_lib_init_lc_monetary_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000017) for __rt_lib_init_lc_numeric_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000019) for __rt_lib_init_lc_time_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000004) for __rt_lib_init_preinit_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000E) for __rt_lib_init_rand_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000033) for __rt_lib_init_return
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000001D) for __rt_lib_init_signal_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$00000025) for __rt_lib_init_stdio_1
+    libinit.o(.ARM.Collect$$libinit$$00000000) refers (Special) to libinit2.o(.ARM.Collect$$libinit$$0000000C) for __rt_lib_init_user_alloc_1
+    libspace.o(.text) refers to libspace.o(.bss) for __libspace_start
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.Collect$$rtexit$$00000000) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for __rt_exit_exit
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for __rt_exit_ls
+    rtexit.o(.ARM.exidx) refers (Special) to rtexit2.o(.ARM.Collect$$rtexit$$00000002) for __rt_exit_prels_1
+    rtexit.o(.ARM.exidx) refers to rtexit.o(.ARM.Collect$$rtexit$$00000000) for .ARM.Collect$$rtexit$$00000000
+    rt_raise.o(.text) refers to __raise.o(.text) for __raise
+    rt_raise.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_exit.o(.text) refers to sys_exit.o(.text) for _sys_exit
+    defsig_fpe_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    libinit2.o(.ARM.Collect$$libinit$$00000010) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000012) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000014) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000016) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000018) refers to libinit2.o(.ARM.Collect$$libinit$$0000000F) for .ARM.Collect$$libinit$$0000000F
+    libinit2.o(.ARM.Collect$$libinit$$00000026) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    libinit2.o(.ARM.Collect$$libinit$$00000027) refers to argv_veneer.o(.emb_text) for __ARM_argv_veneer
+    sys_exit.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_exit.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    rtexit2.o(.ARM.Collect$$rtexit$$00000003) refers to libshutdown.o(.ARM.Collect$$libshutdown$$00000000) for __rt_lib_shutdown
+    rtexit2.o(.ARM.Collect$$rtexit$$00000004) refers to sys_exit.o(.text) for _sys_exit
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000001) for .ARM.Collect$$rtexit$$00000001
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000003) for .ARM.Collect$$rtexit$$00000003
+    rtexit2.o(.ARM.exidx) refers to rtexit2.o(.ARM.Collect$$rtexit$$00000004) for .ARM.Collect$$rtexit$$00000004
+    __raise.o(.text) refers to defsig.o(CL$$defsig) for __default_signal_handler
+    defsig_general.o(.text) refers to sys_wrch.o(.text) for _ttywrch
+    argv_veneer.o(.emb_text) refers to no_argv.o(.text) for __ARM_get_argv
+    sys_wrch.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_wrch.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig.o(CL$$defsig) refers to defsig_fpe_inner.o(.text) for __rt_SIGFPE_inner
+    defsig.o(CL$$defsig) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    _get_argv_nomalloc.o(.text) refers (Special) to hrguard.o(.text) for __heap_region$guard
+    _get_argv_nomalloc.o(.text) refers to defsig_rtmem_outer.o(.text) for __rt_SIGRTMEM
+    _get_argv_nomalloc.o(.text) refers to sys_command.o(.text) for _sys_command_string
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000002) for __rt_lib_shutdown_cpp_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000007) for __rt_lib_shutdown_fp_trap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F) for __rt_lib_shutdown_heap_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000010) for __rt_lib_shutdown_return
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A) for __rt_lib_shutdown_signal_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$00000004) for __rt_lib_shutdown_stdio_1
+    libshutdown.o(.ARM.Collect$$libshutdown$$00000000) refers (Special) to libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C) for __rt_lib_shutdown_user_alloc_1
+    sys_command.o(.text) refers (Special) to use_no_semi.o(.text) for __I$use$semihosting
+    sys_command.o(.text) refers (Special) to indicate_semi.o(.text) for __semihosting_library_function
+    defsig_abrt_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtred_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtmem_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_rtmem_outer.o(.text) refers to defsig_rtmem_inner.o(.text) for __rt_SIGRTMEM_inner
+    defsig_rtmem_outer.o(.text) refers to defsig_exit.o(.text) for __sig_exit
+    defsig_rtmem_formal.o(.text) refers to rt_raise.o(.text) for __rt_raise
+    defsig_stak_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_pvfn_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_cppl_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_segv_inner.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+    defsig_other.o(.text) refers to defsig_general.o(.text) for __default_signal_display
+
+
+==============================================================================
+
+Removing Unused input sections from the image.
+
+    Removing main.o(.rev16_text), (4 bytes).
+    Removing main.o(.revsh_text), (4 bytes).
+    Removing main.o(.rrx_text), (6 bytes).
+    Removing main.o(i.calibrate), (50 bytes).
+    Removing main.o(i.debounceButton), (52 bytes).
+    Removing main.o(i.drawLetter), (66 bytes).
+    Removing main.o(i.drawString), (48 bytes).
+    Removing main.o(i.initializeRTC), (48 bytes).
+    Removing main.o(i.myUART_Thread), (148 bytes).
+    Removing main.o(.constdata), (4 bytes).
+    Removing asciilib.o(i.GetASCIICode), (44 bytes).
+    Removing asciilib.o(.constdata), (3040 bytes).
+    Removing lcd_ili9325.o(.rev16_text), (4 bytes).
+    Removing lcd_ili9325.o(.revsh_text), (4 bytes).
+    Removing lcd_ili9325.o(.rrx_text), (6 bytes).
+    Removing open1768_lcd.o(.rev16_text), (4 bytes).
+    Removing open1768_lcd.o(.revsh_text), (4 bytes).
+    Removing open1768_lcd.o(.rrx_text), (6 bytes).
+    Removing open1768_lcd.o(i.lcdSetCursor), (24 bytes).
+    Removing tp_open1768.o(.rev16_text), (4 bytes).
+    Removing tp_open1768.o(.revsh_text), (4 bytes).
+    Removing tp_open1768.o(.rrx_text), (6 bytes).
+    Removing tp_open1768.o(i.touchpanelDelayUS), (42 bytes).
+    Removing tp_open1768.o(i.touchpanelGetXY), (34 bytes).
+    Removing tp_open1768.o(i.touchpanelReadAddress), (44 bytes).
+    Removing tp_open1768.o(i.touchpanelReadX), (48 bytes).
+    Removing tp_open1768.o(i.touchpanelReadY), (48 bytes).
+    Removing tp_open1768.o(i.touchpanelWriteCmd), (60 bytes).
+    Removing buttons_open1768.o(.rev16_text), (4 bytes).
+    Removing buttons_open1768.o(.revsh_text), (4 bytes).
+    Removing buttons_open1768.o(.rrx_text), (6 bytes).
+    Removing buttons_open1768.o(i.Buttons_GetCount), (4 bytes).
+    Removing buttons_open1768.o(i.Buttons_GetState), (48 bytes).
+    Removing buttons_open1768.o(i.Buttons_Initialize), (72 bytes).
+    Removing buttons_open1768.o(i.Buttons_Uninitialize), (48 bytes).
+    Removing buttons_open1768.o(.constdata), (4 bytes).
+    Removing led_open1768.o(.rev16_text), (4 bytes).
+    Removing led_open1768.o(.revsh_text), (4 bytes).
+    Removing led_open1768.o(.rrx_text), (6 bytes).
+    Removing led_open1768.o(i.LED_GetCount), (4 bytes).
+    Removing led_open1768.o(i.LED_Initialize), (92 bytes).
+    Removing led_open1768.o(i.LED_Off), (44 bytes).
+    Removing led_open1768.o(i.LED_On), (44 bytes).
+    Removing led_open1768.o(i.LED_SetOut), (40 bytes).
+    Removing led_open1768.o(i.LED_Uninitialize), (48 bytes).
+    Removing led_open1768.o(.constdata), (8 bytes).
+    Removing uart_lpc17xx.o(.rev16_text), (4 bytes).
+    Removing uart_lpc17xx.o(.revsh_text), (4 bytes).
+    Removing uart_lpc17xx.o(.rrx_text), (6 bytes).
+    Removing gpdma_lpc17xx.o(.rev16_text), (4 bytes).
+    Removing gpdma_lpc17xx.o(.revsh_text), (4 bytes).
+    Removing gpdma_lpc17xx.o(.rrx_text), (6 bytes).
+    Removing gpdma_lpc17xx.o(i.GPDMA_ChannelEnable), (60 bytes).
+    Removing gpdma_lpc17xx.o(i.GPDMA_ChannelGetStatus), (36 bytes).
+    Removing gpio_lpc17xx.o(.rev16_text), (4 bytes).
+    Removing gpio_lpc17xx.o(.revsh_text), (4 bytes).
+    Removing gpio_lpc17xx.o(.rrx_text), (6 bytes).
+    Removing gpio_lpc17xx.o(i.GPIO_PinRead), (32 bytes).
+    Removing gpio_lpc17xx.o(i.GPIO_PinWrite), (40 bytes).
+    Removing gpio_lpc17xx.o(i.GPIO_PortClock), (44 bytes).
+    Removing gpio_lpc17xx.o(i.GPIO_PortRead), (20 bytes).
+    Removing gpio_lpc17xx.o(i.GPIO_PortWrite), (32 bytes).
+    Removing gpio_lpc17xx.o(i.GPIO_SetDir), (56 bytes).
+    Removing pin_lpc17xx.o(.rev16_text), (4 bytes).
+    Removing pin_lpc17xx.o(.revsh_text), (4 bytes).
+    Removing pin_lpc17xx.o(.rrx_text), (6 bytes).
+    Removing pin_lpc17xx.o(i.PIN_ConfigureI2C0Pins), (32 bytes).
+    Removing pin_lpc17xx.o(i.PIN_ConfigureTPIU), (40 bytes).
+    Removing system_lpc17xx.o(.rev16_text), (4 bytes).
+    Removing system_lpc17xx.o(.revsh_text), (4 bytes).
+    Removing system_lpc17xx.o(.rrx_text), (6 bytes).
+    Removing system_lpc17xx.o(i.SystemCoreClockUpdate), (424 bytes).
+
+72 unused section(s) (total 5226 bytes) removed from the image.
+
+==============================================================================
+
+Image Symbol Table
+
+    Local Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    RESET                                    0x00000000   Section      204  startup_lpc17xx.o(RESET)
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit1.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit2.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardinit3.o ABSOLUTE
+    ../clib/angel/boardlib.s                 0x00000000   Number         0  boardshut.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_zi.o ABSOLUTE
+    ../clib/angel/handlers.s                 0x00000000   Number         0  __scatter_copy.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry4.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  rtexit2.o ABSOLUTE
+    ../clib/angel/kernel.s                   0x00000000   Number         0  __rtentry.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_raise.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0_sigfpe.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  aeabi_ldiv0.o ABSOLUTE
+    ../clib/angel/rt.s                       0x00000000   Number         0  rt_div0.o ABSOLUTE
+    ../clib/angel/scatter.s                  0x00000000   Number         0  __scatter.o ABSOLUTE
+    ../clib/angel/startup.s                  0x00000000   Number         0  __main.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  indicate_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  libspace.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  use_no_semi.o ABSOLUTE
+    ../clib/angel/sys.s                      0x00000000   Number         0  sys_stackheap_outer.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_wrch.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_command.o ABSOLUTE
+    ../clib/angel/sysapp.c                   0x00000000   Number         0  sys_exit.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  no_argv.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  _get_argv_nomalloc.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/armsys.c                         0x00000000   Number         0  argv_veneer.o ABSOLUTE
+    ../clib/heapalloc.c                      0x00000000   Number         0  hrguard.o ABSOLUTE
+    ../clib/heapaux.c                        0x00000000   Number         0  heapauxi.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libshutdown2.o ABSOLUTE
+    ../clib/libinit.s                        0x00000000   Number         0  libinit.o ABSOLUTE
+    ../clib/longlong.s                       0x00000000   Number         0  lludivv7m.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_w.o ABSOLUTE
+    ../clib/memcpset.s                       0x00000000   Number         0  rt_memcpy_v6.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_abrt_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_exit.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_fpe_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_general.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  __raise.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_other.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_segv_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_cppl_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_pvfn_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_stak_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_formal.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_outer.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtmem_inner.o ABSOLUTE
+    ../clib/signal.c                         0x00000000   Number         0  defsig_rtred_inner.o ABSOLUTE
+    ../clib/signal.s                         0x00000000   Number         0  defsig.o ABSOLUTE
+    ../clib/stdlib.c                         0x00000000   Number         0  exit.o ABSOLUTE
+    ../fplib/fpinit.s                        0x00000000   Number         0  fpinit.o ABSOLUTE
+    C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\Boards\Waveshare\Open1768\Common\Buttons_Open1768.c 0x00000000   Number         0  buttons_open1768.o ABSOLUTE
+    C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\Boards\Waveshare\Open1768\Common\LED_Open1768.c 0x00000000   Number         0  led_open1768.o ABSOLUTE
+    C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\RTE_Driver\GPDMA_LPC17xx.c 0x00000000   Number         0  gpdma_lpc17xx.o ABSOLUTE
+    C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\RTE_Driver\GPIO_LPC17xx.c 0x00000000   Number         0  gpio_lpc17xx.o ABSOLUTE
+    C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\RTE_Driver\PIN_LPC17xx.c 0x00000000   Number         0  pin_lpc17xx.o ABSOLUTE
+    C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\RTE_Driver\UART_LPC17xx.c 0x00000000   Number         0  uart_lpc17xx.o ABSOLUTE
+    C:\\Keil_v5\\ARM\\PACK\\Keil\\LPC1700_DFP\\2.6.1\\Boards\\Waveshare\\Open1768\\Common\\Buttons_Open1768.c 0x00000000   Number         0  buttons_open1768.o ABSOLUTE
+    C:\\Keil_v5\\ARM\\PACK\\Keil\\LPC1700_DFP\\2.6.1\\Boards\\Waveshare\\Open1768\\Common\\LED_Open1768.c 0x00000000   Number         0  led_open1768.o ABSOLUTE
+    C:\\Keil_v5\\ARM\\PACK\\Keil\\LPC1700_DFP\\2.6.1\\RTE_Driver\\GPDMA_LPC17xx.c 0x00000000   Number         0  gpdma_lpc17xx.o ABSOLUTE
+    C:\\Keil_v5\\ARM\\PACK\\Keil\\LPC1700_DFP\\2.6.1\\RTE_Driver\\GPIO_LPC17xx.c 0x00000000   Number         0  gpio_lpc17xx.o ABSOLUTE
+    C:\\Keil_v5\\ARM\\PACK\\Keil\\LPC1700_DFP\\2.6.1\\RTE_Driver\\PIN_LPC17xx.c 0x00000000   Number         0  pin_lpc17xx.o ABSOLUTE
+    C:\\Keil_v5\\ARM\\PACK\\Keil\\LPC1700_DFP\\2.6.1\\RTE_Driver\\UART_LPC17xx.c 0x00000000   Number         0  uart_lpc17xx.o ABSOLUTE
+    RTE\Device\LPC1768\startup_LPC17xx.s     0x00000000   Number         0  startup_lpc17xx.o ABSOLUTE
+    RTE\Device\LPC1768\system_LPC17xx.c      0x00000000   Number         0  system_lpc17xx.o ABSOLUTE
+    RTE\\Device\\LPC1768\\system_LPC17xx.c   0x00000000   Number         0  system_lpc17xx.o ABSOLUTE
+    dc.s                                     0x00000000   Number         0  dc.o ABSOLUTE
+    libki\LCD_ILI9325.c                      0x00000000   Number         0  lcd_ili9325.o ABSOLUTE
+    libki\Open1768_LCD.c                     0x00000000   Number         0  open1768_lcd.o ABSOLUTE
+    libki\TP_Open1768.c                      0x00000000   Number         0  tp_open1768.o ABSOLUTE
+    libki\\LCD_ILI9325.c                     0x00000000   Number         0  lcd_ili9325.o ABSOLUTE
+    libki\\Open1768_LCD.c                    0x00000000   Number         0  open1768_lcd.o ABSOLUTE
+    libki\\TP_Open1768.c                     0x00000000   Number         0  tp_open1768.o ABSOLUTE
+    libki\asciiLib.c                         0x00000000   Number         0  asciilib.o ABSOLUTE
+    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
+    main.c                                   0x00000000   Number         0  main.o ABSOLUTE
+    !!!main                                  0x000000cc   Section        8  __main.o(!!!main)
+    !!!scatter                               0x000000d4   Section       52  __scatter.o(!!!scatter)
+    !!handler_copy                           0x00000108   Section       26  __scatter_copy.o(!!handler_copy)
+    !!handler_zi                             0x00000124   Section       28  __scatter_zi.o(!!handler_zi)
+    .ARM.Collect$$libinit$$00000000          0x00000140   Section        2  libinit.o(.ARM.Collect$$libinit$$00000000)
+    .ARM.Collect$$libinit$$00000002          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000002)
+    .ARM.Collect$$libinit$$00000004          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    .ARM.Collect$$libinit$$0000000A          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000A)
+    .ARM.Collect$$libinit$$0000000C          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    .ARM.Collect$$libinit$$0000000E          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    .ARM.Collect$$libinit$$00000011          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000011)
+    .ARM.Collect$$libinit$$00000013          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    .ARM.Collect$$libinit$$00000015          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    .ARM.Collect$$libinit$$00000017          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    .ARM.Collect$$libinit$$00000019          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    .ARM.Collect$$libinit$$0000001B          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    .ARM.Collect$$libinit$$0000001D          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    .ARM.Collect$$libinit$$0000001F          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    .ARM.Collect$$libinit$$00000021          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    .ARM.Collect$$libinit$$00000023          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    .ARM.Collect$$libinit$$00000025          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    .ARM.Collect$$libinit$$0000002C          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002C)
+    .ARM.Collect$$libinit$$0000002E          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    .ARM.Collect$$libinit$$00000030          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    .ARM.Collect$$libinit$$00000032          0x00000142   Section        0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    .ARM.Collect$$libinit$$00000033          0x00000142   Section        2  libinit2.o(.ARM.Collect$$libinit$$00000033)
+    .ARM.Collect$$libshutdown$$00000000      0x00000144   Section        2  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    .ARM.Collect$$libshutdown$$00000002      0x00000146   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    .ARM.Collect$$libshutdown$$00000004      0x00000146   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    .ARM.Collect$$libshutdown$$00000007      0x00000146   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
+    .ARM.Collect$$libshutdown$$0000000A      0x00000146   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
+    .ARM.Collect$$libshutdown$$0000000C      0x00000146   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    .ARM.Collect$$libshutdown$$0000000F      0x00000146   Section        0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
+    .ARM.Collect$$libshutdown$$00000010      0x00000146   Section        2  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
+    .ARM.Collect$$rtentry$$00000000          0x00000148   Section        0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    .ARM.Collect$$rtentry$$00000002          0x00000148   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    .ARM.Collect$$rtentry$$00000004          0x00000148   Section        6  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    .ARM.Collect$$rtentry$$00000009          0x0000014e   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    .ARM.Collect$$rtentry$$0000000A          0x0000014e   Section        4  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    .ARM.Collect$$rtentry$$0000000C          0x00000152   Section        0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    .ARM.Collect$$rtentry$$0000000D          0x00000152   Section        8  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    .ARM.Collect$$rtexit$$00000000           0x0000015a   Section        2  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    .ARM.Collect$$rtexit$$00000002           0x0000015c   Section        0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    .ARM.Collect$$rtexit$$00000003           0x0000015c   Section        4  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    .ARM.Collect$$rtexit$$00000004           0x00000160   Section        6  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    .text                                    0x00000168   Section       60  startup_lpc17xx.o(.text)
+    .text                                    0x000001a4   Section      238  lludivv7m.o(.text)
+    .text                                    0x00000292   Section        0  heapauxi.o(.text)
+    .text                                    0x00000298   Section       74  sys_stackheap_outer.o(.text)
+    .text                                    0x000002e2   Section        0  exit.o(.text)
+    .text                                    0x000002f4   Section        8  libspace.o(.text)
+    .ARM.__at_0x02FC                         0x000002fc   Section        4  startup_lpc17xx.o(.ARM.__at_0x02FC)
+    .text                                    0x00000300   Section        0  sys_exit.o(.text)
+    .text                                    0x0000030c   Section        2  use_no_semi.o(.text)
+    .text                                    0x0000030e   Section        0  indicate_semi.o(.text)
+    i.Clear_Channel_active_flag              0x00000310   Section        0  gpdma_lpc17xx.o(i.Clear_Channel_active_flag)
+    Clear_Channel_active_flag                0x00000311   Thumb Code    28  gpdma_lpc17xx.o(i.Clear_Channel_active_flag)
+    i.DMA_IRQHandler                         0x00000330   Section        0  gpdma_lpc17xx.o(i.DMA_IRQHandler)
+    i.EINT0_IRQHandler                       0x000004b0   Section        0  main.o(i.EINT0_IRQHandler)
+    i.GPDMA_ChannelConfigure                 0x000004f0   Section        0  gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure)
+    i.GPDMA_ChannelDisable                   0x000005e4   Section        0  gpdma_lpc17xx.o(i.GPDMA_ChannelDisable)
+    i.GPDMA_ChannelGetCount                  0x00000614   Section        0  gpdma_lpc17xx.o(i.GPDMA_ChannelGetCount)
+    i.GPDMA_Initialize                       0x00000644   Section        0  gpdma_lpc17xx.o(i.GPDMA_Initialize)
+    i.GPDMA_PeripheralSelect                 0x000006ec   Section        0  gpdma_lpc17xx.o(i.GPDMA_PeripheralSelect)
+    i.GPDMA_Uninitialize                     0x00000730   Section        0  gpdma_lpc17xx.o(i.GPDMA_Uninitialize)
+    i.GetUsartClockFreq                      0x000007b0   Section        0  uart_lpc17xx.o(i.GetUsartClockFreq)
+    GetUsartClockFreq                        0x000007b1   Thumb Code    62  uart_lpc17xx.o(i.GetUsartClockFreq)
+    i.PIN_Configure                          0x000007f4   Section        0  pin_lpc17xx.o(i.PIN_Configure)
+    i.RTC_IRQHandler                         0x000008f0   Section        0  main.o(i.RTC_IRQHandler)
+    i.Set_Channel_active_flag                0x00000938   Section        0  gpdma_lpc17xx.o(i.Set_Channel_active_flag)
+    Set_Channel_active_flag                  0x00000939   Thumb Code    50  gpdma_lpc17xx.o(i.Set_Channel_active_flag)
+    i.SysTick_Handler                        0x00000970   Section        0  main.o(i.SysTick_Handler)
+    i.SystemInit                             0x00000980   Section        0  system_lpc17xx.o(i.SystemInit)
+    i.TIMER0_IRQHandler                      0x00000ac0   Section        0  main.o(i.TIMER0_IRQHandler)
+    i.UART1_IRQHandler                       0x00000adc   Section        0  uart_lpc17xx.o(i.UART1_IRQHandler)
+    i.UART_SEND                              0x00000aec   Section        0  main.o(i.UART_SEND)
+    i.USART1_Control                         0x00000b04   Section        0  uart_lpc17xx.o(i.USART1_Control)
+    USART1_Control                           0x00000b05   Thumb Code    18  uart_lpc17xx.o(i.USART1_Control)
+    i.USART1_GPDMA_Rx_Event                  0x00000b1c   Section        0  uart_lpc17xx.o(i.USART1_GPDMA_Rx_Event)
+    i.USART1_GPDMA_Tx_Event                  0x00000b30   Section        0  uart_lpc17xx.o(i.USART1_GPDMA_Tx_Event)
+    i.USART1_GetCapabilities                 0x00000b44   Section        0  uart_lpc17xx.o(i.USART1_GetCapabilities)
+    USART1_GetCapabilities                   0x00000b45   Thumb Code    12  uart_lpc17xx.o(i.USART1_GetCapabilities)
+    i.USART1_GetModemStatus                  0x00000b54   Section        0  uart_lpc17xx.o(i.USART1_GetModemStatus)
+    USART1_GetModemStatus                    0x00000b55   Thumb Code    12  uart_lpc17xx.o(i.USART1_GetModemStatus)
+    i.USART1_GetRxCount                      0x00000b64   Section        0  uart_lpc17xx.o(i.USART1_GetRxCount)
+    USART1_GetRxCount                        0x00000b65   Thumb Code    10  uart_lpc17xx.o(i.USART1_GetRxCount)
+    i.USART1_GetStatus                       0x00000b74   Section        0  uart_lpc17xx.o(i.USART1_GetStatus)
+    USART1_GetStatus                         0x00000b75   Thumb Code    12  uart_lpc17xx.o(i.USART1_GetStatus)
+    i.USART1_GetTxCount                      0x00000b84   Section        0  uart_lpc17xx.o(i.USART1_GetTxCount)
+    USART1_GetTxCount                        0x00000b85   Thumb Code    10  uart_lpc17xx.o(i.USART1_GetTxCount)
+    i.USART1_Initialize                      0x00000b94   Section        0  uart_lpc17xx.o(i.USART1_Initialize)
+    USART1_Initialize                        0x00000b95   Thumb Code    14  uart_lpc17xx.o(i.USART1_Initialize)
+    i.USART1_PowerControl                    0x00000ba8   Section        0  uart_lpc17xx.o(i.USART1_PowerControl)
+    USART1_PowerControl                      0x00000ba9   Thumb Code    14  uart_lpc17xx.o(i.USART1_PowerControl)
+    i.USART1_Receive                         0x00000bbc   Section        0  uart_lpc17xx.o(i.USART1_Receive)
+    USART1_Receive                           0x00000bbd   Thumb Code    18  uart_lpc17xx.o(i.USART1_Receive)
+    i.USART1_Send                            0x00000bd4   Section        0  uart_lpc17xx.o(i.USART1_Send)
+    USART1_Send                              0x00000bd5   Thumb Code    18  uart_lpc17xx.o(i.USART1_Send)
+    i.USART1_SetModemControl                 0x00000bec   Section        0  uart_lpc17xx.o(i.USART1_SetModemControl)
+    USART1_SetModemControl                   0x00000bed   Thumb Code    14  uart_lpc17xx.o(i.USART1_SetModemControl)
+    i.USART1_Transfer                        0x00000c00   Section        0  uart_lpc17xx.o(i.USART1_Transfer)
+    USART1_Transfer                          0x00000c01   Thumb Code    22  uart_lpc17xx.o(i.USART1_Transfer)
+    i.USART1_Uninitialize                    0x00000c1c   Section        0  uart_lpc17xx.o(i.USART1_Uninitialize)
+    USART1_Uninitialize                      0x00000c1d   Thumb Code    10  uart_lpc17xx.o(i.USART1_Uninitialize)
+    i.USART_Control                          0x00000c2c   Section        0  uart_lpc17xx.o(i.USART_Control)
+    USART_Control                            0x00000c2d   Thumb Code  1644  uart_lpc17xx.o(i.USART_Control)
+    i.USART_GPDMA_Rx_Event                   0x0000129c   Section        0  uart_lpc17xx.o(i.USART_GPDMA_Rx_Event)
+    USART_GPDMA_Rx_Event                     0x0000129d   Thumb Code   134  uart_lpc17xx.o(i.USART_GPDMA_Rx_Event)
+    i.USART_GPDMA_Tx_Event                   0x00001322   Section        0  uart_lpc17xx.o(i.USART_GPDMA_Tx_Event)
+    USART_GPDMA_Tx_Event                     0x00001323   Thumb Code    74  uart_lpc17xx.o(i.USART_GPDMA_Tx_Event)
+    i.USART_GetCapabilities                  0x0000136c   Section        0  uart_lpc17xx.o(i.USART_GetCapabilities)
+    USART_GetCapabilities                    0x0000136d   Thumb Code     6  uart_lpc17xx.o(i.USART_GetCapabilities)
+    i.USART_GetModemStatus                   0x00001372   Section        0  uart_lpc17xx.o(i.USART_GetModemStatus)
+    USART_GetModemStatus                     0x00001373   Thumb Code   236  uart_lpc17xx.o(i.USART_GetModemStatus)
+    i.USART_GetRxCount                       0x0000145e   Section        0  uart_lpc17xx.o(i.USART_GetRxCount)
+    USART_GetRxCount                         0x0000145f   Thumb Code    28  uart_lpc17xx.o(i.USART_GetRxCount)
+    i.USART_GetStatus                        0x0000147a   Section        0  uart_lpc17xx.o(i.USART_GetStatus)
+    USART_GetStatus                          0x0000147b   Thumb Code   188  uart_lpc17xx.o(i.USART_GetStatus)
+    i.USART_GetTxCount                       0x00001536   Section        0  uart_lpc17xx.o(i.USART_GetTxCount)
+    USART_GetTxCount                         0x00001537   Thumb Code    28  uart_lpc17xx.o(i.USART_GetTxCount)
+    i.USART_IRQHandler                       0x00001552   Section        0  uart_lpc17xx.o(i.USART_IRQHandler)
+    USART_IRQHandler                         0x00001553   Thumb Code   624  uart_lpc17xx.o(i.USART_IRQHandler)
+    i.USART_Initialize                       0x000017c2   Section        0  uart_lpc17xx.o(i.USART_Initialize)
+    USART_Initialize                         0x000017c3   Thumb Code   254  uart_lpc17xx.o(i.USART_Initialize)
+    i.USART_PowerControl                     0x000018c0   Section        0  uart_lpc17xx.o(i.USART_PowerControl)
+    USART_PowerControl                       0x000018c1   Thumb Code   600  uart_lpc17xx.o(i.USART_PowerControl)
+    i.USART_Receive                          0x00001b1c   Section        0  uart_lpc17xx.o(i.USART_Receive)
+    USART_Receive                            0x00001b1d   Thumb Code   272  uart_lpc17xx.o(i.USART_Receive)
+    i.USART_RxLineIntHandler                 0x00001c2c   Section        0  uart_lpc17xx.o(i.USART_RxLineIntHandler)
+    USART_RxLineIntHandler                   0x00001c2d   Thumb Code   104  uart_lpc17xx.o(i.USART_RxLineIntHandler)
+    i.USART_Send                             0x00001c94   Section        0  uart_lpc17xx.o(i.USART_Send)
+    USART_Send                               0x00001c95   Thumb Code   412  uart_lpc17xx.o(i.USART_Send)
+    i.USART_SetBaudrate                      0x00001e30   Section        0  uart_lpc17xx.o(i.USART_SetBaudrate)
+    i.USART_SetModemControl                  0x00001f64   Section        0  uart_lpc17xx.o(i.USART_SetModemControl)
+    USART_SetModemControl                    0x00001f65   Thumb Code   160  uart_lpc17xx.o(i.USART_SetModemControl)
+    i.USART_Transfer                         0x00002004   Section        0  uart_lpc17xx.o(i.USART_Transfer)
+    USART_Transfer                           0x00002005   Thumb Code   122  uart_lpc17xx.o(i.USART_Transfer)
+    i.USART_Uninitialize                     0x0000207e   Section        0  uart_lpc17xx.o(i.USART_Uninitialize)
+    USART_Uninitialize                       0x0000207f   Thumb Code   226  uart_lpc17xx.o(i.USART_Uninitialize)
+    i.USARTx_GetVersion                      0x00002160   Section        0  uart_lpc17xx.o(i.USARTx_GetVersion)
+    USARTx_GetVersion                        0x00002161   Thumb Code    10  uart_lpc17xx.o(i.USARTx_GetVersion)
+    i.__NVIC_ClearPendingIRQ                 0x00002170   Section        0  uart_lpc17xx.o(i.__NVIC_ClearPendingIRQ)
+    __NVIC_ClearPendingIRQ                   0x00002171   Thumb Code    22  uart_lpc17xx.o(i.__NVIC_ClearPendingIRQ)
+    i.__NVIC_ClearPendingIRQ                 0x0000218c   Section        0  gpdma_lpc17xx.o(i.__NVIC_ClearPendingIRQ)
+    __NVIC_ClearPendingIRQ                   0x0000218d   Thumb Code    22  gpdma_lpc17xx.o(i.__NVIC_ClearPendingIRQ)
+    i.__NVIC_EnableIRQ                       0x000021a8   Section        0  main.o(i.__NVIC_EnableIRQ)
+    __NVIC_EnableIRQ                         0x000021a9   Thumb Code    26  main.o(i.__NVIC_EnableIRQ)
+    i.delay_ms                               0x000021c2   Section        0  lcd_ili9325.o(i.delay_ms)
+    i.drawLine                               0x000021e0   Section        0  main.o(i.drawLine)
+    i.draw_keyboard                          0x0000229c   Section        0  main.o(i.draw_keyboard)
+    i.firePixel                              0x000022ba   Section        0  main.o(i.firePixel)
+    i.initLcdConfiguration                   0x000022dc   Section        0  main.o(i.initLcdConfiguration)
+    i.init_ILI9325                           0x00002324   Section        0  lcd_ili9325.o(i.init_ILI9325)
+    i.initalizeDISPLAY                       0x000024f8   Section        0  main.o(i.initalizeDISPLAY)
+    i.initialize                             0x00002510   Section        0  main.o(i.initialize)
+    i.lcdConfiguration                       0x000025b8   Section        0  open1768_lcd.o(i.lcdConfiguration)
+    i.lcdRead                                0x000025e0   Section        0  open1768_lcd.o(i.lcdRead)
+    i.lcdReadData                            0x0000262c   Section        0  open1768_lcd.o(i.lcdReadData)
+    i.lcdReadReg                             0x00002664   Section        0  open1768_lcd.o(i.lcdReadReg)
+    i.lcdSend                                0x00002678   Section        0  open1768_lcd.o(i.lcdSend)
+    i.lcdWriteData                           0x000026a4   Section        0  open1768_lcd.o(i.lcdWriteData)
+    i.lcdWriteIndex                          0x000026dc   Section        0  open1768_lcd.o(i.lcdWriteIndex)
+    i.lcdWriteReg                            0x0000271c   Section        0  open1768_lcd.o(i.lcdWriteReg)
+    i.main                                   0x00002730   Section        0  main.o(i.main)
+    i.setAutoIncrementBackground             0x00002740   Section        0  main.o(i.setAutoIncrementBackground)
+    i.touchpanelDriverDataBusInit            0x0000278c   Section        0  tp_open1768.o(i.touchpanelDriverDataBusInit)
+    touchpanelDriverDataBusInit              0x0000278d   Thumb Code   140  tp_open1768.o(i.touchpanelDriverDataBusInit)
+    i.touchpanelInit                         0x00002824   Section        0  tp_open1768.o(i.touchpanelInit)
+    i.wait_delay                             0x0000284c   Section        0  open1768_lcd.o(i.wait_delay)
+    .constdata                               0x00002860   Section      468  uart_lpc17xx.o(.constdata)
+    usart_driver_version                     0x00002860   Data           4  uart_lpc17xx.o(.constdata)
+    fract_div_lookup_table                   0x00002864   Data         288  uart_lpc17xx.o(.constdata)
+    USART1_pin_tx                            0x00002984   Data           2  uart_lpc17xx.o(.constdata)
+    USART1_pin_rx                            0x00002986   Data           2  uart_lpc17xx.o(.constdata)
+    USART1_DMA_Tx                            0x00002988   Data           8  uart_lpc17xx.o(.constdata)
+    USART1_DMA_Rx                            0x00002990   Data           8  uart_lpc17xx.o(.constdata)
+    USART1_Resources                         0x00002998   Data         100  uart_lpc17xx.o(.constdata)
+    STACK                                    0x10000000   Section      512  startup_lpc17xx.o(STACK)
+    Stack_Mem                                0x10000000   Data         512  startup_lpc17xx.o(STACK)
+    __initial_sp                             0x10000200   Data           0  startup_lpc17xx.o(STACK)
+    .data                                    0x2007c000   Section       28  main.o(.data)
+    USARTdrv                                 0x2007c010   Data           4  main.o(.data)
+    tikTak                                   0x2007c014   Data           4  main.o(.data)
+    led                                      0x2007c018   Data           4  main.o(.data)
+    .data                                    0x2007c01c   Section        8  gpdma_lpc17xx.o(.data)
+    Channel_active                           0x2007c01c   Data           4  gpdma_lpc17xx.o(.data)
+    Init_cnt                                 0x2007c020   Data           4  gpdma_lpc17xx.o(.data)
+    .data                                    0x2007c024   Section        4  system_lpc17xx.o(.data)
+    .bss                                     0x2007c028   Section       52  uart_lpc17xx.o(.bss)
+    USART1_Info                              0x2007c028   Data          52  uart_lpc17xx.o(.bss)
+    .bss                                     0x2007c05c   Section      160  gpdma_lpc17xx.o(.bss)
+    Channel_info                             0x2007c05c   Data         160  gpdma_lpc17xx.o(.bss)
+    .bss                                     0x2007c0fc   Section       96  libspace.o(.bss)
+    HEAP                                     0x2007c160   Section        0  startup_lpc17xx.o(HEAP)
+    Heap_Mem                                 0x2007c160   Data           0  startup_lpc17xx.o(HEAP)
+
+    Global Symbols
+
+    Symbol Name                              Value     Ov Type        Size  Object(Section)
+
+    BuildAttributes$$THM_ISAv4$P$D$K$B$S$PE$A:L22UL41UL21$X:L11$S22US41US21$IEEE1$IW$USESV6$~STKCKD$USESV7$~SHL$OSPACE$ROPI$EBA8$UX$STANDARDLIB$REQ8$PRES8$EABIv2 0x00000000   Number         0  anon$$obj.o ABSOLUTE
+    __ARM_use_no_argv                        0x00000000   Number         0  main.o ABSOLUTE
+    __Vectors                                0x00000000   Data           4  startup_lpc17xx.o(RESET)
+    __ARM_exceptions_init                     - Undefined Weak Reference
+    __alloca_initialize                       - Undefined Weak Reference
+    __arm_preinit_                            - Undefined Weak Reference
+    __cpp_initialize__aeabi_                  - Undefined Weak Reference
+    __cxa_finalize                            - Undefined Weak Reference
+    __rt_locale                               - Undefined Weak Reference
+    __sigvec_lookup                           - Undefined Weak Reference
+    _atexit_init                              - Undefined Weak Reference
+    _call_atexit_fns                          - Undefined Weak Reference
+    _clock_init                               - Undefined Weak Reference
+    _fp_trap_init                             - Undefined Weak Reference
+    _fp_trap_shutdown                         - Undefined Weak Reference
+    _get_lc_collate                           - Undefined Weak Reference
+    _get_lc_ctype                             - Undefined Weak Reference
+    _get_lc_monetary                          - Undefined Weak Reference
+    _get_lc_numeric                           - Undefined Weak Reference
+    _get_lc_time                              - Undefined Weak Reference
+    _getenv_init                              - Undefined Weak Reference
+    _handle_redirection                       - Undefined Weak Reference
+    _init_alloc                               - Undefined Weak Reference
+    _init_user_alloc                          - Undefined Weak Reference
+    _initio                                   - Undefined Weak Reference
+    _rand_init                                - Undefined Weak Reference
+    _signal_finish                            - Undefined Weak Reference
+    _signal_init                              - Undefined Weak Reference
+    _terminate_alloc                          - Undefined Weak Reference
+    _terminate_user_alloc                     - Undefined Weak Reference
+    _terminateio                              - Undefined Weak Reference
+    __main                                   0x000000cd   Thumb Code     8  __main.o(!!!main)
+    __scatterload                            0x000000d5   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_rt2                        0x000000d5   Thumb Code    44  __scatter.o(!!!scatter)
+    __scatterload_rt2_thumb_only             0x000000d5   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_null                       0x000000e3   Thumb Code     0  __scatter.o(!!!scatter)
+    __scatterload_copy                       0x00000109   Thumb Code    26  __scatter_copy.o(!!handler_copy)
+    __scatterload_zeroinit                   0x00000125   Thumb Code    28  __scatter_zi.o(!!handler_zi)
+    __rt_lib_init                            0x00000141   Thumb Code     0  libinit.o(.ARM.Collect$$libinit$$00000000)
+    __rt_lib_init_alloca_1                   0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002E)
+    __rt_lib_init_argv_1                     0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000002C)
+    __rt_lib_init_atexit_1                   0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001B)
+    __rt_lib_init_clock_1                    0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000021)
+    __rt_lib_init_cpp_1                      0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000032)
+    __rt_lib_init_exceptions_1               0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000030)
+    __rt_lib_init_fp_1                       0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000002)
+    __rt_lib_init_fp_trap_1                  0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001F)
+    __rt_lib_init_getenv_1                   0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000023)
+    __rt_lib_init_heap_1                     0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000A)
+    __rt_lib_init_lc_collate_1               0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000011)
+    __rt_lib_init_lc_ctype_1                 0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000013)
+    __rt_lib_init_lc_monetary_1              0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000015)
+    __rt_lib_init_lc_numeric_1               0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000017)
+    __rt_lib_init_lc_time_1                  0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000019)
+    __rt_lib_init_preinit_1                  0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000004)
+    __rt_lib_init_rand_1                     0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000E)
+    __rt_lib_init_return                     0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000033)
+    __rt_lib_init_signal_1                   0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000001D)
+    __rt_lib_init_stdio_1                    0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$00000025)
+    __rt_lib_init_user_alloc_1               0x00000143   Thumb Code     0  libinit2.o(.ARM.Collect$$libinit$$0000000C)
+    __rt_lib_shutdown                        0x00000145   Thumb Code     0  libshutdown.o(.ARM.Collect$$libshutdown$$00000000)
+    __rt_lib_shutdown_cpp_1                  0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000002)
+    __rt_lib_shutdown_fp_trap_1              0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000007)
+    __rt_lib_shutdown_heap_1                 0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000F)
+    __rt_lib_shutdown_return                 0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000010)
+    __rt_lib_shutdown_signal_1               0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000A)
+    __rt_lib_shutdown_stdio_1                0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$00000004)
+    __rt_lib_shutdown_user_alloc_1           0x00000147   Thumb Code     0  libshutdown2.o(.ARM.Collect$$libshutdown$$0000000C)
+    __rt_entry                               0x00000149   Thumb Code     0  __rtentry.o(.ARM.Collect$$rtentry$$00000000)
+    __rt_entry_presh_1                       0x00000149   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000002)
+    __rt_entry_sh                            0x00000149   Thumb Code     0  __rtentry4.o(.ARM.Collect$$rtentry$$00000004)
+    __rt_entry_li                            0x0000014f   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000A)
+    __rt_entry_postsh_1                      0x0000014f   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$00000009)
+    __rt_entry_main                          0x00000153   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000D)
+    __rt_entry_postli_1                      0x00000153   Thumb Code     0  __rtentry2.o(.ARM.Collect$$rtentry$$0000000C)
+    __rt_exit                                0x0000015b   Thumb Code     0  rtexit.o(.ARM.Collect$$rtexit$$00000000)
+    __rt_exit_ls                             0x0000015d   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000003)
+    __rt_exit_prels_1                        0x0000015d   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000002)
+    __rt_exit_exit                           0x00000161   Thumb Code     0  rtexit2.o(.ARM.Collect$$rtexit$$00000004)
+    Reset_Handler                            0x00000169   Thumb Code     8  startup_lpc17xx.o(.text)
+    NMI_Handler                              0x00000171   Thumb Code     2  startup_lpc17xx.o(.text)
+    HardFault_Handler                        0x00000173   Thumb Code     2  startup_lpc17xx.o(.text)
+    MemManage_Handler                        0x00000175   Thumb Code     2  startup_lpc17xx.o(.text)
+    BusFault_Handler                         0x00000177   Thumb Code     2  startup_lpc17xx.o(.text)
+    UsageFault_Handler                       0x00000179   Thumb Code     2  startup_lpc17xx.o(.text)
+    SVC_Handler                              0x0000017b   Thumb Code     2  startup_lpc17xx.o(.text)
+    DebugMon_Handler                         0x0000017d   Thumb Code     2  startup_lpc17xx.o(.text)
+    PendSV_Handler                           0x0000017f   Thumb Code     2  startup_lpc17xx.o(.text)
+    ADC_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    BOD_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    CANActivity_IRQHandler                   0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    CAN_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    EINT1_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    EINT2_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    EINT3_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    ENET_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    I2C0_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    I2C1_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    I2C2_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    I2S_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    MCPWM_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    PLL0_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    PLL1_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    PWM1_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    QEI_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    RIT_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    SPI_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    SSP0_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    SSP1_IRQHandler                          0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    TIMER1_IRQHandler                        0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    TIMER2_IRQHandler                        0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    TIMER3_IRQHandler                        0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    UART0_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    UART2_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    UART3_IRQHandler                         0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    USBActivity_IRQHandler                   0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    USB_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    WDT_IRQHandler                           0x00000183   Thumb Code     0  startup_lpc17xx.o(.text)
+    __user_initial_stackheap                 0x00000185   Thumb Code     0  startup_lpc17xx.o(.text)
+    __aeabi_uldivmod                         0x000001a5   Thumb Code     0  lludivv7m.o(.text)
+    _ll_udiv                                 0x000001a5   Thumb Code   238  lludivv7m.o(.text)
+    __use_two_region_memory                  0x00000293   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_escrow$2region                 0x00000295   Thumb Code     2  heapauxi.o(.text)
+    __rt_heap_expand$2region                 0x00000297   Thumb Code     2  heapauxi.o(.text)
+    __user_setup_stackheap                   0x00000299   Thumb Code    74  sys_stackheap_outer.o(.text)
+    exit                                     0x000002e3   Thumb Code    18  exit.o(.text)
+    __user_libspace                          0x000002f5   Thumb Code     8  libspace.o(.text)
+    __user_perproc_libspace                  0x000002f5   Thumb Code     0  libspace.o(.text)
+    __user_perthread_libspace                0x000002f5   Thumb Code     0  libspace.o(.text)
+    _sys_exit                                0x00000301   Thumb Code     8  sys_exit.o(.text)
+    __I$use$semihosting                      0x0000030d   Thumb Code     0  use_no_semi.o(.text)
+    __use_no_semihosting_swi                 0x0000030d   Thumb Code     2  use_no_semi.o(.text)
+    __semihosting_library_function           0x0000030f   Thumb Code     0  indicate_semi.o(.text)
+    DMA_IRQHandler                           0x00000331   Thumb Code   372  gpdma_lpc17xx.o(i.DMA_IRQHandler)
+    EINT0_IRQHandler                         0x000004b1   Thumb Code    46  main.o(i.EINT0_IRQHandler)
+    GPDMA_ChannelConfigure                   0x000004f1   Thumb Code   232  gpdma_lpc17xx.o(i.GPDMA_ChannelConfigure)
+    GPDMA_ChannelDisable                     0x000005e5   Thumb Code    44  gpdma_lpc17xx.o(i.GPDMA_ChannelDisable)
+    GPDMA_ChannelGetCount                    0x00000615   Thumb Code    38  gpdma_lpc17xx.o(i.GPDMA_ChannelGetCount)
+    GPDMA_Initialize                         0x00000645   Thumb Code   146  gpdma_lpc17xx.o(i.GPDMA_Initialize)
+    GPDMA_PeripheralSelect                   0x000006ed   Thumb Code    62  gpdma_lpc17xx.o(i.GPDMA_PeripheralSelect)
+    GPDMA_Uninitialize                       0x00000731   Thumb Code   116  gpdma_lpc17xx.o(i.GPDMA_Uninitialize)
+    PIN_Configure                            0x000007f5   Thumb Code   246  pin_lpc17xx.o(i.PIN_Configure)
+    RTC_IRQHandler                           0x000008f1   Thumb Code    46  main.o(i.RTC_IRQHandler)
+    SysTick_Handler                          0x00000971   Thumb Code    12  main.o(i.SysTick_Handler)
+    SystemInit                               0x00000981   Thumb Code   302  system_lpc17xx.o(i.SystemInit)
+    TIMER0_IRQHandler                        0x00000ac1   Thumb Code    20  main.o(i.TIMER0_IRQHandler)
+    UART1_IRQHandler                         0x00000add   Thumb Code    10  uart_lpc17xx.o(i.UART1_IRQHandler)
+    UART_SEND                                0x00000aed   Thumb Code    20  main.o(i.UART_SEND)
+    USART1_GPDMA_Rx_Event                    0x00000b1d   Thumb Code    14  uart_lpc17xx.o(i.USART1_GPDMA_Rx_Event)
+    USART1_GPDMA_Tx_Event                    0x00000b31   Thumb Code    14  uart_lpc17xx.o(i.USART1_GPDMA_Tx_Event)
+    USART_SetBaudrate                        0x00001e31   Thumb Code   302  uart_lpc17xx.o(i.USART_SetBaudrate)
+    delay_ms                                 0x000021c3   Thumb Code    30  lcd_ili9325.o(i.delay_ms)
+    drawLine                                 0x000021e1   Thumb Code   188  main.o(i.drawLine)
+    draw_keyboard                            0x0000229d   Thumb Code    30  main.o(i.draw_keyboard)
+    firePixel                                0x000022bb   Thumb Code    34  main.o(i.firePixel)
+    initLcdConfiguration                     0x000022dd   Thumb Code    54  main.o(i.initLcdConfiguration)
+    init_ILI9325                             0x00002325   Thumb Code   468  lcd_ili9325.o(i.init_ILI9325)
+    initalizeDISPLAY                         0x000024f9   Thumb Code    18  main.o(i.initalizeDISPLAY)
+    initialize                               0x00002511   Thumb Code   152  main.o(i.initialize)
+    lcdConfiguration                         0x000025b9   Thumb Code    36  open1768_lcd.o(i.lcdConfiguration)
+    lcdRead                                  0x000025e1   Thumb Code    70  open1768_lcd.o(i.lcdRead)
+    lcdReadData                              0x0000262d   Thumb Code    50  open1768_lcd.o(i.lcdReadData)
+    lcdReadReg                               0x00002665   Thumb Code    20  open1768_lcd.o(i.lcdReadReg)
+    lcdSend                                  0x00002679   Thumb Code    40  open1768_lcd.o(i.lcdSend)
+    lcdWriteData                             0x000026a5   Thumb Code    50  open1768_lcd.o(i.lcdWriteData)
+    lcdWriteIndex                            0x000026dd   Thumb Code    60  open1768_lcd.o(i.lcdWriteIndex)
+    lcdWriteReg                              0x0000271d   Thumb Code    20  open1768_lcd.o(i.lcdWriteReg)
+    main                                     0x00002731   Thumb Code    16  main.o(i.main)
+    setAutoIncrementBackground               0x00002741   Thumb Code    74  main.o(i.setAutoIncrementBackground)
+    touchpanelInit                           0x00002825   Thumb Code    34  tp_open1768.o(i.touchpanelInit)
+    wait_delay                               0x0000284d   Thumb Code    18  open1768_lcd.o(i.wait_delay)
+    Driver_USART1                            0x000029fc   Data          56  uart_lpc17xx.o(.constdata)
+    Region$$Table$$Base                      0x00002a34   Number         0  anon$$obj.o(Region$$Table)
+    Region$$Table$$Limit                     0x00002a64   Number         0  anon$$obj.o(Region$$Table)
+    x_wsk                                    0x2007c000   Data           4  main.o(.data)
+    y_wsk                                    0x2007c004   Data           4  main.o(.data)
+    msTicks                                  0x2007c008   Data           4  main.o(.data)
+    lastScreenDebounce                       0x2007c00c   Data           4  main.o(.data)
+    SystemCoreClock                          0x2007c024   Data           4  system_lpc17xx.o(.data)
+    __libspace_start                         0x2007c0fc   Data          96  libspace.o(.bss)
+    __temporary_stack_top$libspace           0x2007c15c   Data           0  libspace.o(.bss)
+
+
+
+==============================================================================
+
+Memory Map of the image
+
+  Image Entry point : 0x000000cd
+
+  Load Region LR_IROM1 (Base: 0x00000000, Size: 0x00002a8c, Max: 0x00080000, ABSOLUTE)
+
+    Execution Region ER_IROM1 (Exec base: 0x00000000, Load base: 0x00000000, Size: 0x00002a64, Max: 0x00080000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x00000000   0x00000000   0x000000cc   Data   RO          950    RESET               startup_lpc17xx.o
+    0x000000cc   0x000000cc   0x00000008   Code   RO         1002  * !!!main             c_w.l(__main.o)
+    0x000000d4   0x000000d4   0x00000034   Code   RO         1171    !!!scatter          c_w.l(__scatter.o)
+    0x00000108   0x00000108   0x0000001a   Code   RO         1173    !!handler_copy      c_w.l(__scatter_copy.o)
+    0x00000122   0x00000122   0x00000002   PAD
+    0x00000124   0x00000124   0x0000001c   Code   RO         1175    !!handler_zi        c_w.l(__scatter_zi.o)
+    0x00000140   0x00000140   0x00000002   Code   RO         1041    .ARM.Collect$$libinit$$00000000  c_w.l(libinit.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1054    .ARM.Collect$$libinit$$00000002  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1056    .ARM.Collect$$libinit$$00000004  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1059    .ARM.Collect$$libinit$$0000000A  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1061    .ARM.Collect$$libinit$$0000000C  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1063    .ARM.Collect$$libinit$$0000000E  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1066    .ARM.Collect$$libinit$$00000011  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1068    .ARM.Collect$$libinit$$00000013  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1070    .ARM.Collect$$libinit$$00000015  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1072    .ARM.Collect$$libinit$$00000017  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1074    .ARM.Collect$$libinit$$00000019  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1076    .ARM.Collect$$libinit$$0000001B  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1078    .ARM.Collect$$libinit$$0000001D  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1080    .ARM.Collect$$libinit$$0000001F  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1082    .ARM.Collect$$libinit$$00000021  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1084    .ARM.Collect$$libinit$$00000023  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1086    .ARM.Collect$$libinit$$00000025  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1090    .ARM.Collect$$libinit$$0000002C  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1092    .ARM.Collect$$libinit$$0000002E  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1094    .ARM.Collect$$libinit$$00000030  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000000   Code   RO         1096    .ARM.Collect$$libinit$$00000032  c_w.l(libinit2.o)
+    0x00000142   0x00000142   0x00000002   Code   RO         1097    .ARM.Collect$$libinit$$00000033  c_w.l(libinit2.o)
+    0x00000144   0x00000144   0x00000002   Code   RO         1128    .ARM.Collect$$libshutdown$$00000000  c_w.l(libshutdown.o)
+    0x00000146   0x00000146   0x00000000   Code   RO         1154    .ARM.Collect$$libshutdown$$00000002  c_w.l(libshutdown2.o)
+    0x00000146   0x00000146   0x00000000   Code   RO         1156    .ARM.Collect$$libshutdown$$00000004  c_w.l(libshutdown2.o)
+    0x00000146   0x00000146   0x00000000   Code   RO         1159    .ARM.Collect$$libshutdown$$00000007  c_w.l(libshutdown2.o)
+    0x00000146   0x00000146   0x00000000   Code   RO         1162    .ARM.Collect$$libshutdown$$0000000A  c_w.l(libshutdown2.o)
+    0x00000146   0x00000146   0x00000000   Code   RO         1164    .ARM.Collect$$libshutdown$$0000000C  c_w.l(libshutdown2.o)
+    0x00000146   0x00000146   0x00000000   Code   RO         1167    .ARM.Collect$$libshutdown$$0000000F  c_w.l(libshutdown2.o)
+    0x00000146   0x00000146   0x00000002   Code   RO         1168    .ARM.Collect$$libshutdown$$00000010  c_w.l(libshutdown2.o)
+    0x00000148   0x00000148   0x00000000   Code   RO         1004    .ARM.Collect$$rtentry$$00000000  c_w.l(__rtentry.o)
+    0x00000148   0x00000148   0x00000000   Code   RO         1012    .ARM.Collect$$rtentry$$00000002  c_w.l(__rtentry2.o)
+    0x00000148   0x00000148   0x00000006   Code   RO         1024    .ARM.Collect$$rtentry$$00000004  c_w.l(__rtentry4.o)
+    0x0000014e   0x0000014e   0x00000000   Code   RO         1014    .ARM.Collect$$rtentry$$00000009  c_w.l(__rtentry2.o)
+    0x0000014e   0x0000014e   0x00000004   Code   RO         1015    .ARM.Collect$$rtentry$$0000000A  c_w.l(__rtentry2.o)
+    0x00000152   0x00000152   0x00000000   Code   RO         1017    .ARM.Collect$$rtentry$$0000000C  c_w.l(__rtentry2.o)
+    0x00000152   0x00000152   0x00000008   Code   RO         1018    .ARM.Collect$$rtentry$$0000000D  c_w.l(__rtentry2.o)
+    0x0000015a   0x0000015a   0x00000002   Code   RO         1045    .ARM.Collect$$rtexit$$00000000  c_w.l(rtexit.o)
+    0x0000015c   0x0000015c   0x00000000   Code   RO         1101    .ARM.Collect$$rtexit$$00000002  c_w.l(rtexit2.o)
+    0x0000015c   0x0000015c   0x00000004   Code   RO         1102    .ARM.Collect$$rtexit$$00000003  c_w.l(rtexit2.o)
+    0x00000160   0x00000160   0x00000006   Code   RO         1103    .ARM.Collect$$rtexit$$00000004  c_w.l(rtexit2.o)
+    0x00000166   0x00000166   0x00000002   PAD
+    0x00000168   0x00000168   0x0000003c   Code   RO          952    .text               startup_lpc17xx.o
+    0x000001a4   0x000001a4   0x000000ee   Code   RO          996    .text               c_w.l(lludivv7m.o)
+    0x00000292   0x00000292   0x00000006   Code   RO         1000    .text               c_w.l(heapauxi.o)
+    0x00000298   0x00000298   0x0000004a   Code   RO         1028    .text               c_w.l(sys_stackheap_outer.o)
+    0x000002e2   0x000002e2   0x00000012   Code   RO         1030    .text               c_w.l(exit.o)
+    0x000002f4   0x000002f4   0x00000008   Code   RO         1042    .text               c_w.l(libspace.o)
+    0x000002fc   0x000002fc   0x00000004   Code   RO          951    .ARM.__at_0x02FC    startup_lpc17xx.o
+    0x00000300   0x00000300   0x0000000c   Code   RO         1098    .text               c_w.l(sys_exit.o)
+    0x0000030c   0x0000030c   0x00000002   Code   RO         1117    .text               c_w.l(use_no_semi.o)
+    0x0000030e   0x0000030e   0x00000000   Code   RO         1119    .text               c_w.l(indicate_semi.o)
+    0x0000030e   0x0000030e   0x00000002   PAD
+    0x00000310   0x00000310   0x00000020   Code   RO          771    i.Clear_Channel_active_flag  gpdma_lpc17xx.o
+    0x00000330   0x00000330   0x00000180   Code   RO          772    i.DMA_IRQHandler    gpdma_lpc17xx.o
+    0x000004b0   0x000004b0   0x00000040   Code   RO            4    i.EINT0_IRQHandler  main.o
+    0x000004f0   0x000004f0   0x000000f4   Code   RO          773    i.GPDMA_ChannelConfigure  gpdma_lpc17xx.o
+    0x000005e4   0x000005e4   0x00000030   Code   RO          774    i.GPDMA_ChannelDisable  gpdma_lpc17xx.o
+    0x00000614   0x00000614   0x00000030   Code   RO          776    i.GPDMA_ChannelGetCount  gpdma_lpc17xx.o
+    0x00000644   0x00000644   0x000000a8   Code   RO          778    i.GPDMA_Initialize  gpdma_lpc17xx.o
+    0x000006ec   0x000006ec   0x00000044   Code   RO          779    i.GPDMA_PeripheralSelect  gpdma_lpc17xx.o
+    0x00000730   0x00000730   0x00000080   Code   RO          780    i.GPDMA_Uninitialize  gpdma_lpc17xx.o
+    0x000007b0   0x000007b0   0x00000044   Code   RO          544    i.GetUsartClockFreq  uart_lpc17xx.o
+    0x000007f4   0x000007f4   0x000000fc   Code   RO          915    i.PIN_Configure     pin_lpc17xx.o
+    0x000008f0   0x000008f0   0x00000048   Code   RO            5    i.RTC_IRQHandler    main.o
+    0x00000938   0x00000938   0x00000038   Code   RO          781    i.Set_Channel_active_flag  gpdma_lpc17xx.o
+    0x00000970   0x00000970   0x00000010   Code   RO            6    i.SysTick_Handler   main.o
+    0x00000980   0x00000980   0x00000140   Code   RO          962    i.SystemInit        system_lpc17xx.o
+    0x00000ac0   0x00000ac0   0x0000001c   Code   RO            7    i.TIMER0_IRQHandler  main.o
+    0x00000adc   0x00000adc   0x00000010   Code   RO          545    i.UART1_IRQHandler  uart_lpc17xx.o
+    0x00000aec   0x00000aec   0x00000018   Code   RO            8    i.UART_SEND         main.o
+    0x00000b04   0x00000b04   0x00000018   Code   RO          546    i.USART1_Control    uart_lpc17xx.o
+    0x00000b1c   0x00000b1c   0x00000014   Code   RO          547    i.USART1_GPDMA_Rx_Event  uart_lpc17xx.o
+    0x00000b30   0x00000b30   0x00000014   Code   RO          548    i.USART1_GPDMA_Tx_Event  uart_lpc17xx.o
+    0x00000b44   0x00000b44   0x00000010   Code   RO          549    i.USART1_GetCapabilities  uart_lpc17xx.o
+    0x00000b54   0x00000b54   0x00000010   Code   RO          550    i.USART1_GetModemStatus  uart_lpc17xx.o
+    0x00000b64   0x00000b64   0x00000010   Code   RO          551    i.USART1_GetRxCount  uart_lpc17xx.o
+    0x00000b74   0x00000b74   0x00000010   Code   RO          552    i.USART1_GetStatus  uart_lpc17xx.o
+    0x00000b84   0x00000b84   0x00000010   Code   RO          553    i.USART1_GetTxCount  uart_lpc17xx.o
+    0x00000b94   0x00000b94   0x00000014   Code   RO          554    i.USART1_Initialize  uart_lpc17xx.o
+    0x00000ba8   0x00000ba8   0x00000014   Code   RO          555    i.USART1_PowerControl  uart_lpc17xx.o
+    0x00000bbc   0x00000bbc   0x00000018   Code   RO          556    i.USART1_Receive    uart_lpc17xx.o
+    0x00000bd4   0x00000bd4   0x00000018   Code   RO          557    i.USART1_Send       uart_lpc17xx.o
+    0x00000bec   0x00000bec   0x00000014   Code   RO          558    i.USART1_SetModemControl  uart_lpc17xx.o
+    0x00000c00   0x00000c00   0x0000001c   Code   RO          559    i.USART1_Transfer   uart_lpc17xx.o
+    0x00000c1c   0x00000c1c   0x00000010   Code   RO          560    i.USART1_Uninitialize  uart_lpc17xx.o
+    0x00000c2c   0x00000c2c   0x00000670   Code   RO          561    i.USART_Control     uart_lpc17xx.o
+    0x0000129c   0x0000129c   0x00000086   Code   RO          562    i.USART_GPDMA_Rx_Event  uart_lpc17xx.o
+    0x00001322   0x00001322   0x0000004a   Code   RO          563    i.USART_GPDMA_Tx_Event  uart_lpc17xx.o
+    0x0000136c   0x0000136c   0x00000006   Code   RO          564    i.USART_GetCapabilities  uart_lpc17xx.o
+    0x00001372   0x00001372   0x000000ec   Code   RO          565    i.USART_GetModemStatus  uart_lpc17xx.o
+    0x0000145e   0x0000145e   0x0000001c   Code   RO          566    i.USART_GetRxCount  uart_lpc17xx.o
+    0x0000147a   0x0000147a   0x000000bc   Code   RO          567    i.USART_GetStatus   uart_lpc17xx.o
+    0x00001536   0x00001536   0x0000001c   Code   RO          568    i.USART_GetTxCount  uart_lpc17xx.o
+    0x00001552   0x00001552   0x00000270   Code   RO          569    i.USART_IRQHandler  uart_lpc17xx.o
+    0x000017c2   0x000017c2   0x000000fe   Code   RO          570    i.USART_Initialize  uart_lpc17xx.o
+    0x000018c0   0x000018c0   0x0000025c   Code   RO          571    i.USART_PowerControl  uart_lpc17xx.o
+    0x00001b1c   0x00001b1c   0x00000110   Code   RO          572    i.USART_Receive     uart_lpc17xx.o
+    0x00001c2c   0x00001c2c   0x00000068   Code   RO          573    i.USART_RxLineIntHandler  uart_lpc17xx.o
+    0x00001c94   0x00001c94   0x0000019c   Code   RO          574    i.USART_Send        uart_lpc17xx.o
+    0x00001e30   0x00001e30   0x00000134   Code   RO          575    i.USART_SetBaudrate  uart_lpc17xx.o
+    0x00001f64   0x00001f64   0x000000a0   Code   RO          576    i.USART_SetModemControl  uart_lpc17xx.o
+    0x00002004   0x00002004   0x0000007a   Code   RO          577    i.USART_Transfer    uart_lpc17xx.o
+    0x0000207e   0x0000207e   0x000000e2   Code   RO          578    i.USART_Uninitialize  uart_lpc17xx.o
+    0x00002160   0x00002160   0x00000010   Code   RO          579    i.USARTx_GetVersion  uart_lpc17xx.o
+    0x00002170   0x00002170   0x0000001c   Code   RO          580    i.__NVIC_ClearPendingIRQ  uart_lpc17xx.o
+    0x0000218c   0x0000218c   0x0000001c   Code   RO          782    i.__NVIC_ClearPendingIRQ  gpdma_lpc17xx.o
+    0x000021a8   0x000021a8   0x0000001a   Code   RO            9    i.__NVIC_EnableIRQ  main.o
+    0x000021c2   0x000021c2   0x0000001e   Code   RO          236    i.delay_ms          lcd_ili9325.o
+    0x000021e0   0x000021e0   0x000000bc   Code   RO           13    i.drawLine          main.o
+    0x0000229c   0x0000229c   0x0000001e   Code   RO           15    i.draw_keyboard     main.o
+    0x000022ba   0x000022ba   0x00000022   Code   RO           16    i.firePixel         main.o
+    0x000022dc   0x000022dc   0x00000048   Code   RO           17    i.initLcdConfiguration  main.o
+    0x00002324   0x00002324   0x000001d4   Code   RO          237    i.init_ILI9325      lcd_ili9325.o
+    0x000024f8   0x000024f8   0x00000018   Code   RO           18    i.initalizeDISPLAY  main.o
+    0x00002510   0x00002510   0x000000a8   Code   RO           19    i.initialize        main.o
+    0x000025b8   0x000025b8   0x00000028   Code   RO          276    i.lcdConfiguration  open1768_lcd.o
+    0x000025e0   0x000025e0   0x0000004c   Code   RO          277    i.lcdRead           open1768_lcd.o
+    0x0000262c   0x0000262c   0x00000038   Code   RO          278    i.lcdReadData       open1768_lcd.o
+    0x00002664   0x00002664   0x00000014   Code   RO          279    i.lcdReadReg        open1768_lcd.o
+    0x00002678   0x00002678   0x0000002c   Code   RO          280    i.lcdSend           open1768_lcd.o
+    0x000026a4   0x000026a4   0x00000038   Code   RO          282    i.lcdWriteData      open1768_lcd.o
+    0x000026dc   0x000026dc   0x00000040   Code   RO          283    i.lcdWriteIndex     open1768_lcd.o
+    0x0000271c   0x0000271c   0x00000014   Code   RO          284    i.lcdWriteReg       open1768_lcd.o
+    0x00002730   0x00002730   0x00000010   Code   RO           21    i.main              main.o
+    0x00002740   0x00002740   0x0000004a   Code   RO           23    i.setAutoIncrementBackground  main.o
+    0x0000278a   0x0000278a   0x00000002   PAD
+    0x0000278c   0x0000278c   0x00000098   Code   RO          360    i.touchpanelDriverDataBusInit  tp_open1768.o
+    0x00002824   0x00002824   0x00000028   Code   RO          362    i.touchpanelInit    tp_open1768.o
+    0x0000284c   0x0000284c   0x00000012   Code   RO          342    i.wait_delay        open1768_lcd.o
+    0x0000285e   0x0000285e   0x00000002   PAD
+    0x00002860   0x00002860   0x000001d4   Data   RO          582    .constdata          uart_lpc17xx.o
+    0x00002a34   0x00002a34   0x00000030   Data   RO         1169    Region$$Table       anon$$obj.o
+
+
+    Execution Region RW_IRAM1 (Exec base: 0x10000000, Load base: 0x00002a64, Size: 0x00000200, Max: 0x00008000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x10000000        -       0x00000200   Zero   RW          948    STACK               startup_lpc17xx.o
+
+
+    Execution Region RW_IRAM2 (Exec base: 0x2007c000, Load base: 0x00002a64, Size: 0x00000160, Max: 0x00008000, ABSOLUTE)
+
+    Exec Addr    Load Addr    Size         Type   Attr      Idx    E Section Name        Object
+
+    0x2007c000   0x00002a64   0x0000001c   Data   RW           25    .data               main.o
+    0x2007c01c   0x00002a80   0x00000008   Data   RW          784    .data               gpdma_lpc17xx.o
+    0x2007c024   0x00002a88   0x00000004   Data   RW          963    .data               system_lpc17xx.o
+    0x2007c028        -       0x00000034   Zero   RW          581    .bss                uart_lpc17xx.o
+    0x2007c05c        -       0x000000a0   Zero   RW          783    .bss                gpdma_lpc17xx.o
+    0x2007c0fc        -       0x00000060   Zero   RW         1043    .bss                c_w.l(libspace.o)
+    0x2007c15c   0x00002a8c   0x00000004   PAD
+    0x2007c160        -       0x00000000   Zero   RW          949    HEAP                startup_lpc17xx.o
+
+
+==============================================================================
+
+Image component sizes
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Object Name
+
+         0          0          0          0          0        884   buttons_open1768.o
+      1204         94          0          8        160       8206   gpdma_lpc17xx.o
+       498          0          0          0          0       1126   lcd_ili9325.o
+       836        100          0         28          0      63006   main.o
+       394         30          0          0          0       4744   open1768_lcd.o
+       252          6          0          0          0        804   pin_lpc17xx.o
+        64         26        204          0        512       1020   startup_lpc17xx.o
+       320         18          0          4          0        827   system_lpc17xx.o
+       192         18          0          0          0       1716   tp_open1768.o
+      5852        150        468          0         52      63466   uart_lpc17xx.o
+
+    ----------------------------------------------------------------------
+      9616        442        720         40        724     145799   Object Totals
+         0          0         48          0          0          0   (incl. Generated)
+         4          0          0          0          0          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Member Name
+
+         8          0          0          0          0         68   __main.o
+         0          0          0          0          0          0   __rtentry.o
+        12          0          0          0          0          0   __rtentry2.o
+         6          0          0          0          0          0   __rtentry4.o
+        52          8          0          0          0          0   __scatter.o
+        26          0          0          0          0          0   __scatter_copy.o
+        28          0          0          0          0          0   __scatter_zi.o
+        18          0          0          0          0         80   exit.o
+         6          0          0          0          0        152   heapauxi.o
+         0          0          0          0          0          0   indicate_semi.o
+         2          0          0          0          0          0   libinit.o
+         2          0          0          0          0          0   libinit2.o
+         2          0          0          0          0          0   libshutdown.o
+         2          0          0          0          0          0   libshutdown2.o
+         8          4          0          0         96         68   libspace.o
+       238          0          0          0          0        100   lludivv7m.o
+         2          0          0          0          0          0   rtexit.o
+        10          0          0          0          0          0   rtexit2.o
+        12          4          0          0          0         68   sys_exit.o
+        74          0          0          0          0         80   sys_stackheap_outer.o
+         2          0          0          0          0         68   use_no_semi.o
+
+    ----------------------------------------------------------------------
+       516         16          0          0        100        684   Library Totals
+         6          0          0          0          4          0   (incl. Padding)
+
+    ----------------------------------------------------------------------
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   Library Name
+
+       510         16          0          0         96        684   c_w.l
+
+    ----------------------------------------------------------------------
+       516         16          0          0        100        684   Library Totals
+
+    ----------------------------------------------------------------------
+
+==============================================================================
+
+
+      Code (inc. data)   RO Data    RW Data    ZI Data      Debug   
+
+     10132        458        720         40        824     142475   Grand Totals
+     10132        458        720         40        824     142475   ELF Image Totals
+     10132        458        720         40          0          0   ROM Totals
+
+==============================================================================
+
+    Total RO  Size (Code + RO Data)                10852 (  10.60kB)
+    Total RW  Size (RW Data + ZI Data)               864 (   0.84kB)
+    Total ROM Size (Code + RO Data + RW Data)      10892 (  10.64kB)
+
+==============================================================================
+

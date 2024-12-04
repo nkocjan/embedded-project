@@ -1,0 +1,11 @@
+.\objects\landtiger_lcd.o: libki\LandTiger_LCD.c
+.\objects\landtiger_lcd.o: libki\LandTiger_LCD.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\Device\Include\LPC17xx.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\core_cm3.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_version.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_compiler.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\cmsis_armcc.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Core\Include\mpu_armv7.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\Device\Include\system_LPC17xx.h
+.\objects\landtiger_lcd.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdlib.h
