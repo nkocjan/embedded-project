@@ -18,14 +18,13 @@
 // ========================================
 /*
 kolumny -> pin P2_8 P2_6 P2_4 P2_2
-                                         col 1		 2		 3   4 
+                                         col 1		 2		 3   4
 wiersze -> pin  P2_7 P2_5 P2_3  P2_1   row 1     2     3     4
 
 
 OS X krotsza
 
 */
-
 
 // ========================================
 //===============ZMIENNE GLOBALNE====================
@@ -45,7 +44,6 @@ static ARM_DRIVER_USART *USARTdrv = &Driver_USART1;
 
 const uint32_t debounceDelay = 50;
 
-
 // ========================================
 //================STRUCTY =================
 // ========================================
@@ -55,19 +53,16 @@ struct Point {
   int y;
 } typedef Point;
 
-
 // ========================================
 // ========== Handlery ====================
 // ========================================
 
 void SysTick_Handler(void) { msTicks++; }
 
-
 void TIMER0_IRQHandler() {
   UART_SEND("PING\n", 5);
   LPC_TIM0->IR = 1;
 }
-
 
 // Handler do RTC
 void RTC_IRQHandler() {
@@ -94,86 +89,87 @@ void EINT0_IRQHandler() {
 }
 
 void EINT3_IRQHandler(void) {
-  // Tablice dla wierszy i kolumn (piny do sprawdzenia)
-  int ROWS =
-      (1 << 7) | (1 << 5) | (1 << 3) | (1 << 1); // P2.7, P2.5, P2.3, P2.1
-  int COLS =
-      (1 << 8) | (1 << 6) | (1 << 4) | (1 << 2); // P2.8, P2.6, P2.4, P2.2
+  // Definicja wierszy i kolumn
+  int ROWS = (1 << 21) | (1 << 19) | (1 << 17) |
+             (1 << 16); // P0.21, P0.19, P0.17, P0.16
+  int COLS = (1 << 22) | (1 << 20) | (1 << 18) |
+             (1 << 15); // P0.22, P0.20, P0.18, P0.15
 
-  // Sprawdzanie przerwań dla wierszy
+  int rows[4] = {21, 19, 17, 16};
+  int cols[4] = {22, 20, 18, 15};
+  // Sprawdzanie przerwań dla wierszy (przy zboczu opadającym lub narastającym)
   for (int row = 0; row < 4; row++) {
-    if (LPC_GPIOINT->IO2IntStatF &
-        (1 << (7 - 2 * row))) { // Zbocze opadające (naciśnięcie)
-      // Tutaj można wykonać odpowiednią akcję dla wciśnięcia klawisza w danym
-      // wierszu
+    int rowPin =
+        rows[row]; // Obliczanie pinu wiersza: P0.21, P0.19, P0.17, P0.16
+
+    if (LPC_GPIOINT->IO0IntStatF &
+        (1 << rowPin)) { // Zbocze opadające (naciśnięcie klawisza)
+      // Obsługa naciśnięcia klawisza
       for (int col = 0; col < 4; col++) {
-        if (LPC_GPIOINT->IO2IntStatR &
-            (1 << (8 - 2 * col))) { // Zbocze narastające
-          // Klawisz w tej kolumnie został puszczony
-          keyState[row][col] = false;
-        } else {
-          // Klawisz w tej kolumnie został wciśnięty
-          keyState[row][col] = true;
+        int colPin =
+            cols[col]; // Obliczanie pinu kolumny: P0.22, P0.20, P0.18, P0.15
+
+        if (!(LPC_GPIO0->FIOPIN & (1 << colPin))) { // Jeśli stan kolumny niski
+          keyState[row][col] = true;                // Klawisz wciśnięty
         }
       }
     }
 
-    if (LPC_GPIOINT->IO2IntStatR &
-        (1 << (7 - 2 * row))) { // Zbocze narastające (puszczenie)
-      // Klawisz w tym wierszu został puszczony
+    if (LPC_GPIOINT->IO0IntStatR &
+        (1 << rowPin)) { // Zbocze narastające (puszczenie klawisza)
+      // Obsługa puszczenia klawisza
       for (int col = 0; col < 4; col++) {
-        keyState[row][col] = false;
+        int colPin =
+            22 -
+            (col * 2); // Obliczanie pinu kolumny: P0.22, P0.20, P0.18, P0.15
+
+        if (LPC_GPIO0->FIOPIN & (1 << colPin)) { // Jeśli stan kolumny wysoki
+          keyState[row][col] = false;            // Klawisz puszczony
+        }
       }
     }
   }
 
-  // Czyszczenie flag przerwania
-  LPC_GPIOINT->IO2IntClr = ROWS; // Czyszczenie wszystkich flag przerwania
+  // Czyszczenie flag przerwania dla wierszy
+  LPC_GPIOINT->IO0IntClr =
+      ROWS; // Czyszczenie wszystkich flag przerwania dla portu 0
 }
-
-
-
 
 // ========================================
 // ============= INICJALIZACJE ================
 // ========================================
 
-
-
 void initializeKeyboard() {
   // Definicja wierszy i kolumn
-  int ROWS =
-      (1 << 7) | (1 << 5) | (1 << 3) | (1 << 1); // P2.7, P2.5, P2.3, P2.1
-  int COLS =
-      (1 << 8) | (1 << 6) | (1 << 4) | (1 << 2); // P2.8, P2.6, P2.4, P2.2
+  int ROWS = (1 << 21) | (1 << 19) | (1 << 17) |
+             (1 << 16); // P0.21, P0.19, P0.17, P0.16
+  int COLS = (1 << 22) | (1 << 20) | (1 << 18) |
+             (1 << 15); // P0.22, P0.20, P0.18, P0.15
 
-  // **WIERSZE (WEJŚCIA)** (P2.7, P2.5, P2.3, P2.1)
-  LPC_PINCON->PINSEL4 &= ~((3 << 14) | (3 << 10) | (3 << 6) |
-                           (3 << 2)); // GPIO dla P2.7, P2.5, P2.3, P2.1
-  LPC_GPIO2->FIODIR &= ~ROWS;         //  jako wejścia
-  LPC_PINCON->PINMODE4 |=
-      ((2 << 14) | (2 << 10) | (2 << 6) |
-       (2 << 2)); // Tryb high-impedance (brak pull-up/pull-down)
+  // **WIERSZE (WEJŚCIA)** (P0.21, P0.19, P0.17, P0.16)
+  LPC_PINCON->PINSEL1 &= ~((3 << 10) | (3 << 6) | (3 << 2) |
+                           (3 << 0)); // GPIO dla P0.21, P0.19, P0.17, P0.16
+  LPC_GPIO0->FIODIR &= ~ROWS;         // jako wejścia
+  LPC_PINCON->PINMODE1 |=
+      ((2 << 10) | (2 << 6) | (2 << 2) |
+       (2 << 0)); // Tryb high-impedance (brak pull-up/pull-down)
 
   // **KONFIGURACJA PRZERWAŃ DLA WEJŚĆ**
-  LPC_GPIOINT->IO2IntEnF |=
+  LPC_GPIOINT->IO0IntEnF |=
       ROWS; // przerwania dla zbocza opadającego (naciśnięcie klawisza)
-  LPC_GPIOINT->IO2IntEnR |=
+  LPC_GPIOINT->IO0IntEnR |=
       ROWS; // przerwania dla zbocza narastającego (puszczenie klawisza)
 
-  // **WYJŚCIA (OPEN-DRAIN)** (P2.8, P2.6, P2.4, P2.2)
-  LPC_PINCON->PINSEL4 &= ~((3 << 16) | (3 << 12) | (3 << 8) |
-                           (3 << 4)); // GPIO dla P2.8, P2.6, P2.4, P2.2
-  LPC_GPIO2->FIODIR |= COLS;          //  jako wyjścia
-  LPC_PINCON->PINMODE_OD1 |=
-      ((1 << 8) | (1 << 6) | (1 << 4) | (1 << 2)); // Open-drain dla wyjść
+  // **KOLUMNY (WYJŚCIA - OPEN-DRAIN)** (P0.22, P0.20, P0.18, P0.15)
+  LPC_PINCON->PINSEL1 &= ~((3 << 12) | (3 << 8) | (3 << 4) |
+                           (3 << 30)); // GPIO dla P0.22, P0.20, P0.18, P0.15
+  LPC_GPIO0->FIODIR |= COLS;           // jako wyjścia
+  LPC_PINCON->PINMODE_OD0 |=
+      ((1 << 22) | (1 << 20) | (1 << 18) | (1 << 15)); // Open-drain dla wyjść
 
-  // przerwania GPIO w NVIC
+  // Przerwania GPIO w NVIC
   NVIC_EnableIRQ(EINT3_IRQn); // Przerwania GPIO są obsługiwane przez EINT3
 }
-
-
-
 // Inicjacja konfiguracji LCD
 // wysylanie danych na UART
 void initLcdConfiguration() {
@@ -222,7 +218,6 @@ void initialize() {
 //=========================================
 
 void UART_SEND(const char *wsk, int len) { USARTdrv->Send(wsk, len); }
-
 
 int debounceButton(int currentState, int *lastState,
                    uint32_t *lastDebounceTime) {
@@ -376,8 +371,6 @@ void drawLine(const Point p1, const Point p2) {
     }
   }
 }
-
-
 
 int main(void) {
   initialize();
