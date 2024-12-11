@@ -1,19 +1,8 @@
 #ifndef HANDLERS_H
 #define HANDLERS_H
-#include "Driver_USART.h"
-#include "LCD_ILI9325.h"
-#include "LPC17xx.h"
-#include "Open1768_LCD.h"
-#include "TP_Open1768.h"
-#include "asciiLib.h"
-#include <Board_Buttons.h>
-#include <Board_LED.h>
-#include <math.h>
-#include <stdbool.h>
-#include <stdio.h>
-#include "uart.h"
-#include "app.h"
 
+#include "app.h"
+#include "uart.h"
 
 void RTC_IRQHandler() {
   static int tikTak = 1;
@@ -35,8 +24,6 @@ void TIMER0_IRQHandler() {
   UART_SEND("PING\n", 5);
   LPC_TIM0->IR = 1;
 }
-
-
 
 void EINT0_IRQHandler() {
   static int led = 1;

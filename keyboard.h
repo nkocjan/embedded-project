@@ -5,19 +5,13 @@
 #include "LPC17xx.h"
 #include "Open1768_LCD.h"
 #include "TP_Open1768.h"
+#include "app.h"
 #include "asciiLib.h"
 #include <Board_Buttons.h>
 #include <Board_LED.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
-#include <stdbool.h>
-#include "app.h"
-
-
-
-
-
 
 void initializeKeyboard() {
   // Definicja wierszy i kolumn
@@ -49,6 +43,23 @@ void initializeKeyboard() {
 
   // Przerwania GPIO w NVIC
   NVIC_EnableIRQ(EINT3_IRQn); // Przerwania GPIO są obsługiwane przez EINT3
+}
+
+void getPressedKey(char *str) {
+  *str = '\0';
+
+  for (int i = 0; i < 4; i++) {
+    for (int j = 0; j < 4; j++) {
+      if (keyState[i][j]) {
+        char c = keypadChars[i][j];
+
+        int len = strlen(str);
+
+        str[len] = c;
+        str[len + 1] = '\0';
+      }
+    }
+  }
 }
 
 #endif
