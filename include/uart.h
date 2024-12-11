@@ -4,10 +4,7 @@
 #include "LCD_ILI9325.h"
 #include "LPC17xx.h"
 #include "Open1768_LCD.h"
-#include "TP_Open1768.h"
 #include "asciiLib.h"
-#include <Board_Buttons.h>
-#include <Board_LED.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -18,14 +15,15 @@ extern ARM_DRIVER_USART Driver_USART1;
 
 static ARM_DRIVER_USART *USARTdrv = &Driver_USART1;
 
-void UART_SEND(const char *wsk, int len) { USARTdrv->Send(wsk, len); ;
-void initializeUART(void){
+void UART_SEND(const char *wsk, int len) { USARTdrv->Send(wsk, len);}; 
+
+void initializeUART2(void){
       USARTdrv->Initialize(NULL);
   USARTdrv->PowerControl(ARM_POWER_FULL);
   USARTdrv->Control(ARM_USART_MODE_ASYNCHRONOUS | ARM_USART_DATA_BITS_8 |
                         ARM_USART_PARITY_NONE | ARM_USART_STOP_BITS_1 |
                         ARM_USART_FLOW_CONTROL_NONE,
-                    4800);
+                    19200);
   USARTdrv->Control(ARM_USART_CONTROL_TX, 1);
   USARTdrv->Control(ARM_USART_CONTROL_RX, 1);
 }

@@ -4,10 +4,7 @@
 #include "LCD_ILI9325.h"
 #include "LPC17xx.h"
 #include "Open1768_LCD.h"
-#include "TP_Open1768.h"
 #include "asciiLib.h"
-#include <Board_Buttons.h>
-#include <Board_LED.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
@@ -23,7 +20,7 @@ void initLcdConfiguration() {
 
   if (lc == 0x8989) {
     UART_SEND("SDD1289", 7);
-  } else if (lc == 0x9328) {
+  } else  {
     UART_SEND("ILI9325", 7);
   }
   init_ILI9325();

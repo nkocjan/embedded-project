@@ -4,28 +4,25 @@
 #include "LCD_ILI9325.h"
 #include "LPC17xx.h"
 #include "Open1768_LCD.h"
-#include "TP_Open1768.h"
 #include "app.h"
 #include "asciiLib.h"
-#include <Board_Buttons.h>
-#include <Board_LED.h>
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 
 void initializeKeyboard() {
   // Definicja wierszy i kolumn
-  int ROWS = (1 << 21) | (1 << 19) | (1 << 17) |
-             (1 << 16); // P0.21, P0.19, P0.17, P0.16
-  int COLS = (1 << 22) | (1 << 20) | (1 << 18) |
-             (1 << 15); // P0.22, P0.20, P0.18, P0.15
+  int ROWS = (1 << 3) | (1 << 2) | (1 << 1) |
+             (1 << 0); // P0.21, P0.19, P0.17, P0.16
+  int COLS = (1 << 24) | (1 << 22) | (1 << 20) |
+             (1 << 18); // P0.22, P0.20, P0.18, P0.15
 
   // **WIERSZE (WEJŚCIA)** (P0.21, P0.19, P0.17, P0.16)
-  LPC_PINCON->PINSEL1 &= ~((3 << 10) | (3 << 6) | (3 << 2) |
-                           (3 << 0)); // GPIO dla P0.21, P0.19, P0.17, P0.16
+  LPC_PINCON->PINSEL0 &= ~((3UL << 6) | (3UL << 4) | (3UL << 2) |
+                           3UL); // GPIO dla P0.21, P0.19, P0.17, P0.16
   LPC_GPIO0->FIODIR &= ~ROWS;         // jako wejścia
-  LPC_PINCON->PINMODE1 |=
-      ((2 << 10) | (2 << 6) | (2 << 2) |
+  LPC_PINCON->PINMODE0 |=
+      ((2 << 6) | (2 << 4) | (2 << 2) |
        (2 << 0)); // Tryb high-impedance (brak pull-up/pull-down)
 
   // **KONFIGURACJA PRZERWAŃ DLA WEJŚĆ**
@@ -35,11 +32,11 @@ void initializeKeyboard() {
       ROWS; // przerwania dla zbocza narastającego (puszczenie klawisza)
 
   // **KOLUMNY (WYJŚCIA - OPEN-DRAIN)** (P0.22, P0.20, P0.18, P0.15)
-  LPC_PINCON->PINSEL1 &= ~((3 << 12) | (3 << 8) | (3 << 4) |
-                           (3 << 30)); // GPIO dla P0.22, P0.20, P0.18, P0.15
+  LPC_PINCON->PINSEL1 &= ~((3 << 16) | (3 << 12) | (3 << 8)); // GPIO dla P0.22, P0.20, P0.18, P0.15
+	LPC_PINCON->PINSEL0 &= ~((3 << 4));
   LPC_GPIO0->FIODIR |= COLS;           // jako wyjścia
-  LPC_PINCON->PINMODE_OD0 |=
-      ((1 << 22) | (1 << 20) | (1 << 18) | (1 << 15)); // Open-drain dla wyjść
+  LPC_PINCON->PINMODE_OD1 |=
+      ((1 << 24) | (1 << 22) | (1 << 20) | (1 << 18)); // Open-drain dla wyjść
 
   // Przerwania GPIO w NVIC
   NVIC_EnableIRQ(EINT3_IRQn); // Przerwania GPIO są obsługiwane przez EINT3
@@ -61,5 +58,7 @@ void getPressedKey(char *str) {
     }
   }
 }
+
+
 
 #endif

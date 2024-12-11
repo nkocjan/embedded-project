@@ -435,10 +435,9 @@ ork --depend=.\objects\startup_lpc17xx.d -o.\objects\startup_lpc17xx.o -I.\RTE\
 Device\LPC1768 -I.\RTE\_Target_1 -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Co
 re\Include -IC:\Keil_v5\ARM\PACK\ARM\CMSIS\5.5.1\CMSIS\Driver\Include -IC:\Keil
 _v5\ARM\PACK\Keil\LPC1700_DFP\2.6.1\Device\Include -IC:\Keil_v5\ARM\PACK\Keil\L
-PC1700_DFP\2.6.1\RTE_Driver -IC:\Keil_v5\ARM\PACK\Keil\MDK-Middleware\7.8.0\Boa
-rd --predefine="__UVISION_VERSION SETA 527" --predefine="_RTE_ SETA 1" --predef
-ine="LPC175x_6x SETA 1" --list=.\listings\startup_lpc17xx.lst RTE\Device\LPC176
-8\startup_LPC17xx.s
+PC1700_DFP\2.6.1\RTE_Driver --predefine="__UVISION_VERSION SETA 527" --predefin
+e="_RTE_ SETA 1" --predefine="LPC175x_6x SETA 1" --list=.\listings\startup_lpc1
+7xx.lst RTE\Device\LPC1768\startup_LPC17xx.s
 
 
 
