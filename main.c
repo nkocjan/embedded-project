@@ -5,6 +5,7 @@
 #include "app.h"
 #include "asciiLib.h"
 #include "handlers.h"
+#include "include/keyboard.h"
 #include "keyboard.h"
 #include "lcd.h"
 #include "rtc.h"
@@ -16,18 +17,19 @@
 
 void initialize() {
   SysTick_Config(SystemCoreClock / 1000);
-	initializeUART2();
+  initializeUART2();
   initLcdConfiguration();
   touchpanelInit();
   initializeKeyboard();
-  
 }
 
 int main(void) {
   initialize();
   setAutoIncrementBackground();
-  
-	while (1) {
-		
+
+  while (1) {
+    if (wasInterupted) {
+      readKeyboard();
+    }
   }
 }
