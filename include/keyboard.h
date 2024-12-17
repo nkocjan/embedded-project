@@ -6,59 +6,79 @@
 #include "Open1768_LCD.h"
 #include "app.h"
 #include "asciiLib.h"
+#include "uart.h"
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
 
 void initializeKeyboard() {
   // Definicja wierszy i kolumn
-  int ROWS = (1 << 3) | (1 << 2) | (1 << 1) |
-             (1 << 0); // P0.21, P0.19, P0.17, P0.16
-  int COLS = (1 << 24) | (1 << 22) | (1 << 20) |
-             (1 << 18); // P0.22, P0.20, P0.18, P0.15
+  int ROWS = (1 << 3) | (1 << 2) | (1 << 1) | (1 << 0);     // P0
+  int COLS = (1 << 21) | (1 << 20) | (1 << 19) | (1 << 18); // P1
 
-  // **WIERSZE (WEJŚCIA)** (P0.21, P0.19, P0.17, P0.16)
-  LPC_PINCON->PINSEL0 &= ~((3UL << 6) | (3UL << 4) | (3UL << 2) |
-                           3UL); // GPIO dla P0.21, P0.19, P0.17, P0.16
-  LPC_GPIO0->FIODIR &= ~ROWS;         // jako wejścia
+  // Konfiguracja wierszy (P0.0 - P0.3)
+  LPC_PINCON->PINSEL0 &= ~((3UL << 6) | (3UL << 4) | (3UL << 2) | 3UL);
+  LPC_GPIO0->FIODIR &= ~ROWS; // Wiersze jako wejścia
   LPC_PINCON->PINMODE0 |=
-      ((2 << 6) | (2 << 4) | (2 << 2) |
-       (2 << 0)); // Tryb high-impedance (brak pull-up/pull-down)
+      ((2 << 6) | (2 << 4) | (2 << 2) | (2 << 0)); // Brak pull-up/pull-down
 
-  // **KONFIGURACJA PRZERWAŃ DLA WEJŚĆ**
-  LPC_GPIOINT->IO0IntEnF |=
-      ROWS; // przerwania dla zbocza opadającego (naciśnięcie klawisza)
-  LPC_GPIOINT->IO0IntEnR |=
-      ROWS; // przerwania dla zbocza narastającego (puszczenie klawisza)
+  // Konfiguracja przerwań dla wejść
+  LPC_GPIOINT->IO0IntEnF |= ROWS; // Zbocze opadające (naciśnięcie klawisza)
 
-  // **KOLUMNY (WYJŚCIA - OPEN-DRAIN)** (P0.22, P0.20, P0.18, P0.15)
-  LPC_PINCON->PINSEL1 &= ~((3 << 16) | (3 << 12) | (3 << 8)); // GPIO dla P0.22, P0.20, P0.18, P0.15
-	LPC_PINCON->PINSEL0 &= ~((3 << 4));
-  LPC_GPIO0->FIODIR |= COLS;           // jako wyjścia
-  LPC_PINCON->PINMODE_OD1 |=
-      ((1 << 24) | (1 << 22) | (1 << 20) | (1 << 18)); // Open-drain dla wyjść
+  // Konfiguracja kolumn (P1.18 - P1.21)
+  LPC_PINCON->PINSEL3 &=
+      ~((3 << 6) | (3 << 4) | (3 << 2) | 3); // GPIO dla P1.18 - P1.21
+  LPC_GPIO1->FIODIR |= COLS;                 // Kolumny jako wyjścia
+  LPC_PINCON->PINMODE_OD1 |= COLS;           // Open-drain dla wyjść
 
   // Przerwania GPIO w NVIC
-  NVIC_EnableIRQ(EINT3_IRQn); // Przerwania GPIO są obsługiwane przez EINT3
+  NVIC_EnableIRQ(EINT3_IRQn); // Przerwania GPIO obsługiwane przez EINT3
 }
 
-void getPressedKey(char *str) {
-  *str = '\0';
+void EINT3_IRQHandler() {
 
-  for (int i = 0; i < 4; i++) {
-    for (int j = 0; j < 4; j++) {
-      if (keyState[i][j]) {
-        char c = keypadChars[i][j];
+  int ROWS =
+      (1 << 3) | (1 << 2) | (1 << 1) | (1 << 0); // P0.0, P0.1, P0.2, P0.3
 
-        int len = strlen(str);
+  // Wyłączenie przerwań od klawiatury
+  LPC_GPIOINT->IO0IntEnF &= ~ROWS;
+  LPC_GPIOINT->IO0IntClr = ROWS;
 
-        str[len] = c;
-        str[len + 1] = '\0';
-      }
-    }
+  wasInterupted = true;
+  // Ponowne włączenie przerwań od klawiatury
+}
+
+void readKeyboard() {
+  int ROWS = (1 << 3) | (1 << 2) | (1 << 1) | (1 << 0);     // P0.0 - P0.3
+  int COLS = (1 << 21) | (1 << 20) | (1 << 19) | (1 << 18); // P1.21 - P1.18
+
+  int row, col;
+  for (row = 0; row < 4; row++) {
+    if (((LPC_GPIO0->FIOPIN >> row) & 1) == 0)
+      break;
   }
+
+  for (col = 0; col < 4; col++) {
+    LPC_GPIO1->FIOSET |= COLS;
+    LPC_GPIO1->FIOCLR = 1 << (col + 18);
+    uint32_t now = msTicks;
+    while (msTicks - now < 5)
+      ;
+
+    if (((LPC_GPIO0->FIOPIN >> row) & 1) == 0)
+      break;
+  }
+
+  LPC_GPIO1->FIOCLR |= COLS;
+
+  char stroke = keypadChars[row][col];
+
+  char txt[] = {stroke, '\n', '\0'};
+  UART_SEND(txt, 3);
+
+  // Ponowne włączenie przerwań od klawiatury
+  LPC_GPIOINT->IO0IntEnF |= ROWS;
+  wasInterupted = false;
 }
-
-
 
 #endif

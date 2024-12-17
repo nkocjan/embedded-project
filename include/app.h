@@ -21,6 +21,7 @@ extern int x_wsk;
 extern int y_wsk;
 extern bool keyState[4][4];
 extern volatile uint32_t msTicks;
+extern volatile bool wasInterupted;
 extern volatile uint32_t lastScreenDebounce;
 extern const uint32_t debounceDelay;
 extern const char keypadChars[4][4];
