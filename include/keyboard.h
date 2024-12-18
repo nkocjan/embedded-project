@@ -36,7 +36,7 @@ void initializeKeyboard() {
 }
 
 void EINT3_IRQHandler() {
-
+  int COLS = (1 << 21) | (1 << 20) | (1 << 19) | (1 << 18); // P1.21 - P1.18
   int ROWS =
       (1 << 3) | (1 << 2) | (1 << 1) | (1 << 0); // P0.0, P0.1, P0.2, P0.3
 
@@ -46,6 +46,7 @@ void EINT3_IRQHandler() {
 
   wasInterupted = true;
   // Ponowne włączenie przerwań od klawiatury
+
 }
 
 void readKeyboard() {
@@ -57,13 +58,12 @@ void readKeyboard() {
     if (((LPC_GPIO0->FIOPIN >> row) & 1) == 0)
       break;
   }
-
+	    LPC_GPIO1->FIOSET |= COLS;
   for (col = 0; col < 4; col++) {
-    LPC_GPIO1->FIOSET |= COLS;
-    LPC_GPIO1->FIOCLR = 1 << (col + 18);
+
+    LPC_GPIO1->FIOCLR = (1 << (col + 18));
     uint32_t now = msTicks;
-    while (msTicks - now < 5)
-      ;
+    while (msTicks - now < 5);
 
     if (((LPC_GPIO0->FIOPIN >> row) & 1) == 0)
       break;

@@ -17,6 +17,11 @@ typedef struct {
   int y;
 } Point;
 
+extern volatile int minutes;
+extern volatile int hours;
+extern volatile int months;
+extern volatile int years;
+extern volatile char date[20];
 extern int x_wsk;
 extern int y_wsk;
 extern bool keyState[4][4];

@@ -47,7 +47,7 @@ void setAutoIncrementBackground() {
   }
 }
 
-void drawLetter(Point p1, const char letter) {
+void drawLetter(int _x, int _y, const char letter) {
   unsigned char buff[16]; // Tablica do przechowywania danych litery (16x16)
   GetASCIICode(1, buff,
                letter); // Zakladam, ze ta funkcja laduje kod ASCII dla litery
@@ -56,20 +56,22 @@ void drawLetter(Point p1, const char letter) {
     for (int x = 0; x < 16; x++) { // Iteracja po kolumnach (szerokosc)
       if (buff[y] &
           (0x80 >> x)) { // Sprawdzamy, czy dany bit jest ustawiony na 1
-        firePixel(p1.x + x, p1.y + y, LCDBlue); // Rysowanie pikseli
+        firePixel(_x + x, _y + y, LCDBlue); // Rysowanie pikseli
       }
     }
   }
 }
 
 // nie
-void drawString(Point p1, const char *wsk) {
+void drawString(int x, int y, const char *wsk) {
   int iter = 0;
   while (*wsk) {
     Point p2;
-    p2.x = p1.x + iter * 8;
-    p2.y = p1.y;
-    drawLetter(p2, *wsk);
+		int x2;
+		int y2;
+    x2 = x + iter * 8;
+    y2 = y;
+    drawLetter(x2, y2, *wsk);
     wsk++;
     iter++;
   }
@@ -98,29 +100,29 @@ Point calibrate(Point _get) {
   return tmp;
 }
 
-void drawLine(const Point p1, const Point p2) {
+void drawLine(int x1, int y1, int x2, int y2) {
   int d, dx, dy, ai, bi, xi, yi;
-  int x = p1.x, y = p1.y;
-  if (p1.x < p2.x) {
+  int x = x1, y = y1;
+  if (x1 < x2) {
     xi = 1;
-    dx = p2.x - p1.x;
+    dx = x2 - x1;
   } else {
     xi = -1;
-    dx = p1.x - p2.x;
+    dx = x1 - x2;
   }
-  if (p1.y < p2.y) {
+  if (y1 < y2) {
     yi = 1;
-    dy = p2.y - p1.y;
+    dy = y2 - y1;
   } else {
     yi = -1;
-    dy = p1.y - p2.y;
+    dy = y1 - y2;
   }
   firePixel(x, y, LCDBlue);
   if (dx > dy) {
     ai = (dy - dx) * 2;
     bi = dy * 2;
     d = bi - dx;
-    while (x != p2.x) {
+    while (x != x2) {
       if (d >= 0) {
         x += xi;
         y += yi;
@@ -135,7 +137,7 @@ void drawLine(const Point p1, const Point p2) {
     ai = (dx - dy) * 2;
     bi = dx * 2;
     d = bi - dy;
-    while (y != p2.y) {
+    while (y != y2) {
       if (d >= 0) {
         x += xi;
         y += yi;

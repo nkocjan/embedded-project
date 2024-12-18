@@ -5,7 +5,6 @@
 #include "app.h"
 #include "asciiLib.h"
 #include "handlers.h"
-#include "include/keyboard.h"
 #include "keyboard.h"
 #include "lcd.h"
 #include "rtc.h"
@@ -14,18 +13,26 @@
 #include <stdbool.h>
 #include <stdio.h>
 #include <string.h>
+#include "interface.h"
 
 void initialize() {
   SysTick_Config(SystemCoreClock / 1000);
   initializeUART2();
   initLcdConfiguration();
-  touchpanelInit();
   initializeKeyboard();
+	initRTC();
+	
+	showInterface();
+	showActualDate();
 }
 
 int main(void) {
   initialize();
-  setAutoIncrementBackground();
+  showLastOpenDate(0);
+	showLastOpenDate(1);
+	showLastOpenDate(2);
+	showLastOpenDate(3);
+	showLastOpenDate(4);
 
   while (1) {
     if (wasInterupted) {

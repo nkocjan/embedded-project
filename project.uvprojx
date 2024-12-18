@@ -412,6 +412,16 @@
               <FileType>1</FileType>
               <FilePath>.\src\app.c</FilePath>
             </File>
+            <File>
+              <FileName>interface.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\include\interface.h</FilePath>
+            </File>
+            <File>
+              <FileName>rtc.h</FileName>
+              <FileType>5</FileType>
+              <FilePath>.\rtc.h</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>

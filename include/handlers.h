@@ -5,7 +5,6 @@
 #include "uart.h"
 #include <cstdint>
 
-volatile uint32_t msTicks = 0;
 
 void SysTick_Handler(void) { msTicks++; }
 
