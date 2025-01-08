@@ -17,8 +17,8 @@ typedef struct {
   int y;
 } Point;
 
-extern volatile int minutes;
-extern volatile int hours;
+extern  int minutes;
+extern  int hours;
 extern volatile int months;
 extern volatile int years;
 extern volatile char date[20];
@@ -31,5 +31,6 @@ extern volatile uint32_t lastScreenDebounce;
 extern const uint32_t debounceDelay;
 extern const char keypadChars[4][4];
 extern char keyPresses[16];
+extern char stroke;
 
 #endif

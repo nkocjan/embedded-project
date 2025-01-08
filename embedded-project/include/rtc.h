@@ -10,14 +10,7 @@
 #include <stdio.h>
 #include "uart.h"
 #include "app.h"
-void initializeRTC() {
-  LPC_SC->PCONP |= (1 << 9);
-  LPC_RTC->CCR = 1;
-  LPC_RTC->ILR = 0;
-  LPC_RTC->CIIR = 1;
 
-  NVIC_EnableIRQ(RTC_IRQn);
-}
 
 
 #endif

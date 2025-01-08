@@ -10,6 +10,10 @@
 #include <math.h>
 #include <stdbool.h>
 #include <stdio.h>
+#include "interface.h"
+
+
+	uint32_t lastDebounce = 0; 
 
 void initializeKeyboard() {
   // Definicja wierszy i kolumn
@@ -44,7 +48,14 @@ void EINT3_IRQHandler() {
   LPC_GPIOINT->IO0IntEnF &= ~ROWS;
   LPC_GPIOINT->IO0IntClr = ROWS;
 
-  wasInterupted = true;
+	if(msTicks - lastDebounce > 2){
+		lastDebounce = msTicks;
+		wasInterupted = true;
+	}
+
+	
+	
+
   // Ponowne włączenie przerwań od klawiatury
 }
 
@@ -62,9 +73,9 @@ void readKeyboard() {
   for (col = 0; col < 4; col++) {
 
     LPC_GPIO1->FIOCLR = (1 << (col + 18));
-    uint32_t now = msTicks;
-    while (msTicks - now < 5)
-      ;
+
+		uint32_t now = msTicks;
+    while (msTicks - now < 1);
 
     if (((LPC_GPIO0->FIOPIN >> row) & 1) == 0)
       break;
@@ -72,15 +83,20 @@ void readKeyboard() {
 
   LPC_GPIO1->FIOCLR |= COLS;
 
-  char stroke = keypadChars[row][col];
+  stroke = keypadChars[row][col];
 
   char txt[] = {stroke, '\n', '\0'};
+
   UART_SEND(txt, 3);
 
   // Ponowne włączenie przerwań od klawiatury
+  LPC_GPIOINT->IO0IntEnF &= ~ROWS;
+  LPC_GPIOINT->IO0IntClr = ROWS;
   LPC_GPIOINT->IO0IntEnF |= ROWS;
+
   wasInterupted = false;
 }
+
 
 // Function to read keyboard state and detect all pressed keys
 void readKeyboardTest() {
@@ -133,9 +149,10 @@ void readKeyboardTest() {
 
   // Set flag indicating no interrupt occurred (reset)
   wasInterupted = false;
-
+	
   // Send all pressed keys via UART
   for (int i = 0; i < 16 && keyPresses[i] != ' '; i++) {
+
     char txt[] = {keyPresses[i], '\n', '\0'};
     UART_SEND(txt, 3);
   }

@@ -23,10 +23,10 @@
 .\objects\main.o: .\include\uart.h
 .\objects\main.o: .\libki\LCD_ILI9325.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\cstdint
-.\objects\main.o: .\include\keyboard.h
-.\objects\main.o: .\libki\LCD_ILI9325.h
+.\objects\main.o: .\include\interface.h
 .\objects\main.o: .\include\lcd.h
 .\objects\main.o: .\libki\LCD_ILI9325.h
 .\objects\main.o: C:\Keil_v5\ARM\ARMCC\Bin\..\include\stdint.h
+.\objects\main.o: .\include\keyboard.h
+.\objects\main.o: .\libki\LCD_ILI9325.h
 .\objects\main.o: rtc.h
-.\objects\main.o: .\include\interface.h

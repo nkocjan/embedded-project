@@ -21,23 +21,16 @@ void initialize() {
   initLcdConfiguration();
   initializeKeyboard();
   initRTC();
-
-  showInterface();
-  showActualDate();
+	drawBasicInterface();
 }
 
 int main(void) {
   initialize();
-  //  showLastOpenDate(0);
-  //	showLastOpenDate(1);
-  //	showLastOpenDate(2);
-  //	showLastOpenDate(3);
-  //	showLastOpenDate(4);
 
   while (1) {
     if (wasInterupted) {
       readKeyboard();
-      processInput(keyPresses);
+			processInput(stroke);
 
       // Read input keys
       //

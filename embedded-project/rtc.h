@@ -7,10 +7,11 @@
 #include "app.h"
 #include "uart.h"
 
-volatile int minutes;
-volatile int hours;
+ int minutes;
+ int hours;
 volatile int months;
 volatile int years;
+volatile int days;
 volatile char date[20];
 
 
@@ -30,7 +31,10 @@ int get_year(){
 	return LPC_RTC->YEAR;
 }
 
-
+void set_day(int d){
+	days = d;
+	LPC_RTC->DOM=d;
+}
 
 void set_hours(int h){
 	hours=h;
@@ -58,7 +62,7 @@ void set_years(int y){
 
 void initTimer1(){
 	LPC_TIM1->PR=0; // without prescaler
-	LPC_TIM1->MR0=60*25000000-1; // 1 MIN
+	LPC_TIM1->MR0=10*25000000-1; // 1 MIN
 	LPC_TIM1->MCR= 0b011; // with interrupt, reset timer on the match, don't stop timer at MR0
 	LPC_TIM1->TCR=1; // enable timer
 	NVIC_EnableIRQ(TIMER1_IRQn);

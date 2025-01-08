@@ -9,38 +9,15 @@
 #include <math.h>
 
 #include "lcd.h"
-
 #include "app.h"
+
 
 int codeWriten = 0;
 int actualInterface = 0;
 int newDateTab[12];
 int newDateTabId = 0;
 
-void processInput(char keys[16]) {
-  int count = 0;
-  for (int i = 0; i < 16; i++) {
-    if (keys[i] != ' ') {
-      count++;
-    }
-  }
 
-  switch (count) {
-  case 0: {
-    return;
-  }
-  case 1: {
-    // proccesOneKey();
-    break;
-  }
-  case 2: {
-    // porcessTwoKeys()
-    break;
-  }
-  default:
-    return;
-  }
-}
 
 void drawLastOpenDates() {
   drawString(40, 170, "Ostatnie otwarcia:");
@@ -62,6 +39,7 @@ void drawDateInTopRight() {
   const int y = 20;
   char wsk[30];
   sprintf(wsk, "%d:%d", hours, minutes);
+	UART_SEND(wsk, 20);
   drawString(x, y, wsk);
 }
 
@@ -107,6 +85,16 @@ void setNewCodeInterface() {
   drawLine(170, 100, 190, 100);
 
   drawString(40, 30, "Podaj nowy kod");
+}
+
+void drawSuccessfulOpenInterface() {
+  setAutoIncrementBackground();
+  drawLine(10, 10, 230, 10);
+  drawLine(10, 10, 10, 310);
+  drawLine(230, 10, 230, 310);
+  drawLine(10, 310, 230, 310);
+
+  drawString(40, 40, "Otwarte");
 }
 
 void setNewCodeSuccessfulInterface() {
@@ -162,14 +150,24 @@ void setNewDateInterfaceSuccessful() {
 
 void codeFull() {
   if (actualInterface == 0) {
-    drawSuccessfulCodeInterface();
+    // Rysowanie otwarcia ekranu
     codeWriten = 0;
+		drawSuccessfulOpenInterface();
   } else if (actualInterface == 1) {
     setNewCodeSuccessfulInterface();
   } else if (actualInterface == 2 && newDateTabId == 12) {
     setNewDateInterfaceSuccessful();
+		int _year = newDateTab[0] * 1000 + newDateTab[1]*100 + newDateTab[2] * 10 + newDateTab[3] * 1;
+		int _month = newDateTab[4] * 10 + newDateTab[5] * 1;
+		int _day = newDateTab[6] * 10 + newDateTab[7] * 1;
+		int godz = newDateTab[8] * 10 + newDateTab[9];
+		int inuta = newDateTab[10] * 10 + newDateTab[11];
+		set_hours(godz);
+		set_minutes(inuta);
 
-    newDateTab = [];
+    for(int i = 0; i < 12; i++){
+			newDateTab[i] = 0;
+		};
     newDateTabId = 0;
   }
 }
@@ -177,7 +175,7 @@ void codeFull() {
 void func0() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -195,8 +193,8 @@ void func0() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
-      newDateTab[newDateTabId] = 0;
+      
+      newDateTab[newDateTabId] = 0;newDateTabId++;
     }
   }
 }
@@ -204,7 +202,7 @@ void func0() {
 void func1() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -222,15 +220,16 @@ void func1() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
-      newDateTab[newDateTabId] = 0;
+      
+      newDateTab[newDateTabId] = 1;
+			newDateTabId++;
     }
   }
 }
 void func2() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -248,15 +247,16 @@ void func2() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
-      newDateTab[newDateTabId] = 0;
+      
+      newDateTab[newDateTabId] = 2;
+			newDateTabId++;
     }
   }
 }
 void func3() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -274,15 +274,16 @@ void func3() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+      
       newDateTab[newDateTabId] = 3;
+			newDateTabId++;
     }
   }
 }
 void func4() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -300,15 +301,16 @@ void func4() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+      
       newDateTab[newDateTabId] = 4;
+			newDateTabId++;
     }
   }
 }
 void func5() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -326,15 +328,16 @@ void func5() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+     
       newDateTab[newDateTabId] = 5;
+			newDateTabId++;
     }
   }
 }
 void func6() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -352,15 +355,16 @@ void func6() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+      
       newDateTab[newDateTabId] = 6;
+			newDateTabId++;
     }
   }
 }
 void func7() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -378,15 +382,16 @@ void func7() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+      
       newDateTab[newDateTabId] = 7;
+			newDateTabId++;
     }
   }
 }
 void func8() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -404,15 +409,16 @@ void func8() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+      
       newDateTab[newDateTabId] = 8;
+			newDateTabId++;
     }
   }
 }
 void func9() {
   if (codeWriten > 3) {
     codeWriten = 0;
-  } else if (codeWriten <= 3 && actualInterface == 0) {
+  } else if ((codeWriten <= 3 && actualInterface == 0) || actualInterface == 1) {
     drawStar(60, 100, codeWriten);
     codeWriten++;
   } else if (actualInterface == 2) {
@@ -430,17 +436,24 @@ void func9() {
 
     if (newDateTabId > 11) {
     } else {
-      newDateTabId++;
+      
       newDateTab[newDateTabId] = 9;
+			newDateTabId++;
     }
   }
 }
 void funcA() { codeFull(); }
 void funcB() {
+	codeWriten = 0;
   actualInterface = 1;
   setNewCodeInterface();
 }
 void funcC() {
+	newDateTabId = 0;
+	  for(int i = 0; i < 12; i++){
+			newDateTab[i] = -1;
+		};
+	codeWriten = 0;
   actualInterface = 2;
   setNewDateInterface();
 }
@@ -449,9 +462,96 @@ void funcE() {}
 void funcF() {
   actualInterface = 0;
   codeWriten = 0;
-  newDateTab = [];
+   for(int i = 0; i < 12; i++){
+		newDateTab[i] = -1;
+		};
   newDateTabId = 0;
   drawBasicInterface();
+}
+
+void processInput(char str) {
+  switch (str) {
+	case '0': {
+		func0();
+		break;
+  }
+  case '1': {
+		func1();
+		break;
+  }
+  case '2': {
+		func2();
+    // proccesOneKey();
+    break;
+  }
+  case '3': {
+		func3();
+    // porcessTwoKeys()
+    break;
+  }
+	case '4': {
+		func4();
+    // porcessTwoKeys()
+    break;
+  }
+	case '5': {
+		func5();
+    // porcessTwoKeys()
+    break;
+  }
+	case '6': {
+		func6();
+    // porcessTwoKeys()
+    break;
+  }
+	case '7': {
+		func7();
+    // porcessTwoKeys()
+    break;
+  }
+	case '8': {
+		func8();
+    // porcessTwoKeys()
+    break;
+  }
+	case '9': {
+		func9();
+    // porcessTwoKeys()
+    break;
+  }
+	case 'A': {
+		funcA();
+    // porcessTwoKeys()
+    break;
+  }
+	case 'B': {
+		funcB();
+    // porcessTwoKeys()
+    break;
+  }
+	case 'C': {
+		funcC();
+    // porcessTwoKeys()
+    break;
+  }
+	case 'D': {
+		funcD();
+    // porcessTwoKeys()
+    break;
+  }
+	case 'E': {
+    funcE();
+		// porcessTwoKeys()
+    break;
+  }
+	case 'F': {
+		funcF();
+    // porcessTwoKeys()
+    break;
+  }
+  default:
+    return;
+  }
 }
 
 #endif
