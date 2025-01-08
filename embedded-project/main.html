@@ -1,0 +1,576 @@
+<!DOCTYPE html>
+<html lang="pl">
+  <head>
+    <meta charset="UTF-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1.0" />
+    <title>Canvas z funkcjami rysowania</title>
+    <style>
+      body {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 100vh;
+        margin: 0;
+        background-color: #f0f0f0;
+      }
+      canvas {
+        border: 1px solid black;
+        display: block;
+      }
+      button {
+        margin: 10px;
+        padding: 10px 20px;
+        font-size: 16px;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Rysowanie na Canvas</h1>
+    <!-- Canvas -->
+    <canvas
+      id="myCanvas"
+      width="240"
+      height="320"></canvas>
+    <!-- Przyciski -->
+    <div>
+      <button onclick="drawBasicInterface()">Rysuj interface</button>
+      <button onclick="drawDateInTopRight()">Rysuj date</button>
+      <button onclick="drawCodeEntry()">Rysuj wpisanie kodu</button>
+    </div>
+
+    <div>
+      <button onclick="func0()">0</button>
+      <button onclick="func1()">1</button>
+      <button onclick="func2()">2</button>
+      <button onclick="func3()">3</button>
+      <button onclick="func4()">4</button>
+      <button onclick="func5()">5</button>
+      <button onclick="func6()">6</button>
+      <button onclick="func7()">7</button>
+      <button onclick="func8()">8</button>
+      <button onclick="func9()">9</button>
+      <button onclick="funcA()">A</button>
+      <button onclick="funcB()">B</button>
+      <button onclick="funcC()">C</button>
+      <button onclick="funcD()">D</button>
+      <button onclick="funcE()">E</button>
+      <button onclick="funcF()">F</button>
+    </div>
+
+    A - zatwierdź
+    <br />
+    B - dodaj nowy kod
+    <br />
+    C - zatwierdź nowy kod
+    <br />
+    D - wpisz date
+    <br />
+    F - Wróć do podstawowego interfejsu
+
+    <script>
+      const canvas = document.getElementById("myCanvas");
+      const ctx = canvas.getContext("2d");
+
+      let codeWrited = 0;
+      let actualInterface = 0;
+      let newDateTab = [];
+      let newDateTabId = 0;
+
+      /*
+      0 - podstawowy
+      1 - ustawianie nowego kodu
+      2 - ustawianie nowej daty
+      */
+
+      function drawPixel(x, y) {
+        ctx.fillStyle = "black";
+        ctx.fillRect(x, y, 1, 1);
+      }
+      function drawLine(x1, y1, x2, y2) {
+        let dx = Math.abs(x2 - x1);
+        let dy = Math.abs(y2 - y1);
+        let sx = x1 < x2 ? 1 : -1;
+        let sy = y1 < y2 ? 1 : -1;
+        let err = dx - dy;
+
+        while (true) {
+          drawPixel(x1, y1);
+          if (x1 === x2 && y1 === y2) break;
+          let e2 = 2 * err;
+          if (e2 > -dy) {
+            err -= dy;
+            x1 += sx;
+          }
+          if (e2 < dx) {
+            err += dx;
+            y1 += sy;
+          }
+        }
+      }
+      function drawLetter(x, y, letter) {
+        const width = 6,
+          height = 8;
+        drawLine(x, y, x + width, y);
+        drawLine(x, y, x, y + height);
+        drawLine(x, y + height, x + width, y + height);
+        drawLine(x + width, y, x + width, y + height);
+      }
+      function drawString(x, y, string) {
+        ctx.fillText(string, x, y);
+      }
+
+      function drawStar(x, y, position) {
+        x = x + position * 40;
+        drawLine(x - 10, y - 10, x + 10, y + 10);
+        drawLine(x + 10, y - 10, x - 10, y + 10);
+        drawLine(x, y - 10, x, y + 10);
+        drawLine(x - 10, y, x + 10, y);
+      }
+
+      function drawBasicInterface() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawLine(10, 10, 230, 10);
+        drawLine(10, 10, 10, 310);
+        drawLine(230, 10, 230, 310);
+        drawLine(10, 310, 230, 310);
+
+        //Rysowanie boxa na gwiazdki
+        drawLine(40, 150, 200, 150);
+        drawLine(40, 150, 40, 50);
+        drawLine(200, 150, 200, 50);
+        drawLine(40, 50, 200, 50);
+
+        //Podkladka pod kod
+        drawLine(50, 100, 70, 100);
+        drawLine(90, 100, 110, 100);
+        drawLine(130, 100, 150, 100);
+        drawLine(170, 100, 190, 100);
+        drawDateInTopRight();
+        drawLastOpenDates();
+      }
+
+      function drawSuccessfulCodeInterface() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawLine(10, 10, 230, 10);
+        drawLine(10, 10, 10, 310);
+        drawLine(230, 10, 230, 310);
+        drawLine(10, 310, 230, 310);
+
+        //Rysowanie boxa na gwiazdki
+        drawLine(40, 150, 200, 150);
+        drawLine(40, 150, 40, 50);
+        drawLine(200, 150, 200, 50);
+        drawLine(40, 50, 200, 50);
+
+        drawString(100, 100, "Otwarte");
+
+        setTimeout(() => {
+          drawBasicInterface();
+        }, 3000);
+      }
+
+      function drawDateInTopRight() {
+        const date = "17.12.2024";
+        const startX = canvas.width - date.length * 8 - 20;
+        const startY = 20;
+        drawString(startX, startY, date);
+      }
+
+      function drawLastOpenDates() {
+        drawString(40, 170, "Ostatnie otwarcia:");
+        for (let i = 0; i < 6; i++) {
+          drawString(40, 200 + i * 15, "13:45 17.12.2024");
+        }
+      }
+
+      function setNewCodeInterface() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawLine(10, 10, 230, 10);
+        drawLine(10, 10, 10, 310);
+        drawLine(230, 10, 230, 310);
+        drawLine(10, 310, 230, 310);
+
+        //Rysowanie boxa na gwiazdki
+        drawLine(40, 150, 200, 150);
+        drawLine(40, 150, 40, 50);
+        drawLine(200, 150, 200, 50);
+        drawLine(40, 50, 200, 50);
+
+        drawLine(50, 100, 70, 100);
+        drawLine(90, 100, 110, 100);
+        drawLine(130, 100, 150, 100);
+        drawLine(170, 100, 190, 100);
+
+        drawString(40, 30, "Podaj nowy kod");
+      }
+
+      function setNewCodeSuccessfulInterface() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawLine(10, 10, 230, 10);
+        drawLine(10, 10, 10, 310);
+        drawLine(230, 10, 230, 310);
+        drawLine(10, 310, 230, 310);
+
+        drawString(40, 40, "Poprawnie dodano kod");
+      }
+
+      function setNewDateInterface() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        drawString(40, 20, "Podaj rok");
+
+        drawLine(40, 50, 50, 50);
+        drawLine(70, 50, 80, 50);
+        drawLine(100, 50, 110, 50);
+        drawLine(130, 50, 140, 50);
+
+        drawString(40, 70, "Podaj miesiac");
+
+        drawLine(40, 100, 50, 100);
+        drawLine(70, 100, 80, 100);
+
+        drawString(40, 120, "Podaj dzien");
+
+        drawLine(40, 150, 50, 150);
+        drawLine(70, 150, 80, 150);
+
+        drawString(40, 170, "Podaj godzine");
+
+        drawLine(40, 200, 50, 200);
+        drawLine(70, 200, 80, 200);
+
+        drawString(40, 220, "Podaj minute");
+
+        drawLine(40, 250, 50, 250);
+        drawLine(70, 250, 80, 250);
+      }
+
+      function setNewDateInterfaceSuccessful() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        drawLine(10, 10, 230, 10);
+        drawLine(10, 10, 10, 310);
+        drawLine(230, 10, 230, 310);
+        drawLine(10, 310, 230, 310);
+
+        drawString(40, 40, "Poprawnie zapisano nową datę");
+      }
+
+      function codeFull() {
+        if (actualInterface == 0) {
+          drawSuccessfulCodeInterface();
+          codeWrited = 0;
+        } else if (actualInterface == 1) {
+          setNewCodeSuccessfulInterface();
+        } else if (actualInterface == 2 && newDateTabId == 12) {
+          setNewDateInterfaceSuccessful();
+
+          newDateTab = [];
+          newDateTabId = 0;
+        }
+      }
+
+      function func0() {
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        } else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "0");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "0");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "0");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "0");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "0");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 0;
+          }
+        }
+      }
+
+      function func1() {
+        console.log("Naciśnięto 1");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        } else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "1");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "1");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "1");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "1");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "1");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 0;
+          }
+        }
+      }
+      function func2() {
+        console.log("Naciśnięto 2");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        } else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "2");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "2");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "2");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "2");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "2");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 0;
+          }
+        }
+      }
+      function func3() {
+        console.log("Naciśnięto 3");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "3");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "3");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "3");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "3");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "3");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 3;
+          }
+        }
+      }
+      function func4() {
+        console.log("Naciśnięto 4");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "4");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "4");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "4");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "4");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "4");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 4;
+          }
+        }
+      }
+      function func5() {
+        console.log("Naciśnięto 5");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "5");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "5");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "5");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "5");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "5");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 5;
+          }
+        }
+      }
+      function func6() {
+        console.log("Naciśnięto 6");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "6");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "6");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "6");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "6");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "6");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 6;
+          }
+        }
+      }
+      function func7() {
+        console.log("Naciśnięto 7");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "7");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "7");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "7");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "7");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "7");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 7;
+          }
+        }
+      }
+      function func8() {
+        console.log("Naciśnięto 8");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "8");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "8");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "8");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "8");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "8");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 8;
+          }
+        }
+      }
+      function func9() {
+        console.log("Naciśnięto 9");
+        if (codeWrited > 3) {
+          codeWrited = 0;
+        } else if (codeWrited <= 3 && actualInterface == 0) {
+          drawStar(60, 100, codeWrited);
+          codeWrited++;
+        }else if (actualInterface == 2) {
+          if (newDateTabId < 4) {
+            drawString(40 + newDateTabId * 30, 48, "9");
+          } else if (newDateTabId == 4 || newDateTabId == 5) {
+            drawString(40 + (newDateTabId - 4) * 30, 98, "9");
+          } else if (newDateTabId == 6 || newDateTabId == 7) {
+            drawString(40 + (newDateTabId - 6) * 30, 148, "9");
+          } else if (newDateTabId == 8 || newDateTabId == 9) {
+            drawString(40 + (newDateTabId - 8) * 30, 198, "9");
+          } else if (newDateTabId == 10 || newDateTabId == 11) {
+            drawString(40 + (newDateTabId - 10) * 30, 248, "9");
+          }
+
+          if (newDateTabId > 11) {
+          } else {
+            newDateTabId++;
+            newDateTab[newDateTabId] = 9;
+          }
+        }
+      }
+      function funcA() {
+        console.log("Naciśnięto A");
+        codeFull();
+      }
+      function funcB() {
+        console.log("Naciśnięto B");
+        actualInterface = 1;
+        setNewCodeInterface();
+      }
+      function funcC() {
+        console.log("Naciśnięto C");
+        actualInterface = 2;
+        setNewDateInterface();
+      }
+      function funcD() {
+        console.log("Naciśnięto D");
+      }
+      function funcE() {
+        console.log("Naciśnięto E");
+      }
+      function funcF() {
+        console.log("Naciśnięto F");
+        actualInterface = 0;
+        codeWrited = 0;
+        newDateTab = [];
+        newDateTabId = 0;
+        drawBasicInterface();
+      }
+    </script>
+  </body>
+</html>
