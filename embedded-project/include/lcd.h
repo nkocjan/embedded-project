@@ -62,7 +62,6 @@ void drawLetter(int _x, int _y, const char letter) {
   }
 }
 
-// nie
 void drawString(int x, int y, const char *wsk) {
   int iter = 0;
   while (*wsk) {
@@ -75,29 +74,6 @@ void drawString(int x, int y, const char *wsk) {
     wsk++;
     iter++;
   }
-}
-
-Point calibrate(Point _get) {
-  int tp_xMax = 4095;
-  int tp_yMax = 4095;
-
-  Point tmp;
-
-  // to do
-  // 90 stopni
-  // temp_x = y_touch;
-  // temp_y = x_touch;
-  // 180 stopni
-  // temp_x = 4000 - x_touch;
-  // temp_y = 4000 - y_touch;
-  // 270 stopni
-  // temp_x = 4000 - y_touch;
-  // temp_y = x_touch;
-
-  tmp.x = (_get.x * LCD_MAX_X) / tp_xMax;
-  tmp.y = (_get.y * LCD_MAX_Y) / tp_yMax;
-
-  return tmp;
 }
 
 void drawLine(int x1, int y1, int x2, int y2) {
