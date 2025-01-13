@@ -7,12 +7,12 @@
 #include "app.h"
 #include "uart.h"
 
- int minutes;
- int hours;
+volatile int minutes;
+volatile int hours;
 volatile int months;
 volatile int years;
 volatile int days;
-volatile char date[20];
+volatile char date[30];
 
 
 int get_hours(){
@@ -61,16 +61,17 @@ void set_years(int y){
 }
 
 void initTimer1(){
-	LPC_TIM1->PR=0; // without prescaler
-	LPC_TIM1->MR0=10*25000000-1; // 1 MIN
-	LPC_TIM1->MCR= 0b011; // with interrupt, reset timer on the match, don't stop timer at MR0
-	LPC_TIM1->TCR=1; // enable timer
+	LPC_TIM1->PR=0;
+	LPC_TIM1->MR0=60*25000000-1;
+	LPC_TIM1->MCR= 0b011;
+	LPC_TIM1->TCR=1;
 	NVIC_EnableIRQ(TIMER1_IRQn);
 }
 
 void initRTC(){
 	initTimer1();
-	LPC_SC->PCONP |= 1<<9; // PCRTC register - supply power to RTC (it's default on)
+	LPC_SC->PCONP |= 1<<9;
+
 	minutes=get_minutes();
 	hours=get_hours();
 }
@@ -83,7 +84,7 @@ void TIMER1_IRQHandler(){ // update time
 	months = get_month();
 	years = get_year();
 
-	sprintf(date, "%d:%d %d-%d", hours, minutes, months, years);
+	sprintf(date, "Data: %d:%d %d-%d", hours, minutes, months, years);
 	UART_SEND(date, strlen(date));
 }
 #endif

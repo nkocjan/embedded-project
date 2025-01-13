@@ -11,17 +11,12 @@
 #include <stdint.h>
 #include <stdio.h>
 #include <string.h>
-// Podstawowy punkt, używany w LCD i touchpanelu.
-typedef struct {
-  int x;
-  int y;
-} Point;
 
-extern  int minutes;
-extern  int hours;
+extern volatile int minutes;
+extern volatile int hours;
 extern volatile int months;
 extern volatile int years;
-extern volatile char date[20];
+extern volatile char date[30];
 extern int x_wsk;
 extern int y_wsk;
 extern bool keyState[4][4];

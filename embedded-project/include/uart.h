@@ -28,20 +28,4 @@ void initializeUART2(void){
   USARTdrv->Control(ARM_USART_CONTROL_RX, 1);
 }
 
-void myUART_Thread(const void *args) {
-  char cmd;
-  USARTdrv->Send("\nPress Enter to receive a message", 34);
-  while (1) {
-    while (USARTdrv->GetStatus().tx_busy) {
-    }
-    USARTdrv->Receive(&cmd, 1);
-    while (USARTdrv->GetStatus().rx_busy) {
-    }
-
-    if (cmd == 13) {
-      USARTdrv->Send("\nHello World!", 12);
-    }
-  }
-}
-
 #endif

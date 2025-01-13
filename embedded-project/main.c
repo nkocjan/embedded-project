@@ -31,13 +31,6 @@ int main(void) {
     if (wasInterupted) {
       readKeyboard();
 			processInput(stroke);
-
-      // Read input keys
-      //
-      //  State managment
-      //
-      //  Match them to a function or to a key
-      //
     }
   }
 }
