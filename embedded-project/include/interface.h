@@ -7,6 +7,7 @@
 #include <math.h>
 #include "lcd.h"
 #include "app.h"
+#include "store.h"
 
 int actualInterface = 0;
 
@@ -17,15 +18,24 @@ int newDateTab[12];
 int newDateTabId = 0;
 
 // Temporary items
-int aktualnyKod[4] = {1,2,3,4};
-int ostatnieOtwarcia[16] = {9,8,13,44,10,6,16,22};
+int aktualnyKod[4] = {0,0,0,0};
 
 // Ostatnie otwarcia
 void drawLastOpenDates() {
   drawString(40, 170, "Ostatnie otwarcia:");
-  drawString(40, 200,"17.12 13:45");
-  drawString(40, 215,"17.12 17:66");
-}
+
+  uint32_t lastOpenDates[4];
+  getDates(lastOpenDates);
+  char dateBuf[30];
+
+  decodeDateTime(lastOpenDates[0], dateBuf);
+  drawString(40, 200, dateBuf);
+  decodeDateTime(lastOpenDates[1], dateBuf);
+  drawString(40, 215, dateBuf);
+  decodeDateTime(lastOpenDates[2], dateBuf);
+  drawString(40, 230, dateBuf);
+  decodeDateTime(lastOpenDates[3], dateBuf);
+  drawString(40, 245, dateBuf);
 
 // Rysowanie gwiazdki do kodu
 void drawStar(int x, int y, int position) {
@@ -111,6 +121,19 @@ void drawWrongCodeOpenInterface() {
   drawString(40, 100, "powrocic na start");
 }
 
+// Interfejs błedna data
+void drawWrongDateInterface() {
+  setAutoIncrementBackground();
+  drawLine(10, 10, 230, 10);
+  drawLine(10, 10, 10, 310);
+  drawLine(230, 10, 230, 310);
+  drawLine(10, 310, 230, 310);
+
+  drawString(40, 40, "Bledny format daty");
+  drawString(40, 80, "Wcisnij F aby");
+  drawString(40, 100, "powrocic na start");
+}
+
 // Interfejs oznaczający poprawne ustawienie nowego kodu
 void setNewCodeSuccessfulInterface() {
   setAutoIncrementBackground();
@@ -169,18 +192,27 @@ void setNewDateInterfaceSuccessful() {
 void approve() {
   if (actualInterface == 0 && codeTabId == 3) {
     if(validateCode()){
+
+      int _year = get_year();
+      int _month = get_month();
+      int _day = get_day();
+      int _hour = get_hours();
+      int _min = get_minutes();
+      
+      uint32_t tmpTime = encodeDateTime(_year, _month, _day, _hour, _min);
+      addNewDate(tmpTime);
+
       drawSuccessfulOpenInterface();
       // TODO DOODAĆ PRZERWĘ 5 SEC
+      
       funcF();
     }else {
       drawWrongCodeOpenInterface();
     }
-
 		
   } else if (actualInterface == 1 && codeTabId == 3) {
-    // TODO DODAC SET NEW CODE
-    // Zapis do zmiennej aktualnyKod, jak i do pamięci
-    // Na podstawie daty z RTC dodać zapis ostatniego wejścia
+    setCode(codeTab);
+    getCode(aktualnyKod);
     setNewCodeSuccessfulInterface();
     resetCodeTab();
     resetDateTab();
@@ -188,10 +220,20 @@ void approve() {
 		int _year = newDateTab[0] * 1000 + newDateTab[1]*100 + newDateTab[2] * 10 + newDateTab[3] * 1;
 		int _month = newDateTab[4] * 10 + newDateTab[5] * 1;
 		int _day = newDateTab[6] * 10 + newDateTab[7] * 1;
-		int godz = newDateTab[8] * 10 + newDateTab[9];
-		int inuta = newDateTab[10] * 10 + newDateTab[11];
-		set_hours(godz);
-		set_minutes(inuta);
+		int _hour = newDateTab[8] * 10 + newDateTab[9];
+		int _min = newDateTab[10] * 10 + newDateTab[11];
+
+    if(_min < 0 || _min > 59 || _hour < 0 || _hour > 59 || _month < 0 || _month > 12 ){
+      drawWrongDateInterface();
+      return;
+    }
+		
+    set_years(_year);
+    set_month(_month);
+    set_day(_day);
+    set_hours(_hour);
+		set_minutes(_min);
+
     setNewDateInterfaceSuccessful();
     
     resetCodeTab();
@@ -329,7 +371,7 @@ void resetDateTab(){
 }
 
 int validateCode(){
-  // TODO get kod z pamięci
+  getCode(aktualnyKod);
   for(int i = 0; i < 4; i++){
     if(codeTab[i] != aktualnyKod[i]){
       return 0;
