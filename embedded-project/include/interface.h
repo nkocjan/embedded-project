@@ -10,6 +10,7 @@
 #include "app.h"
 #include "handlers.h"
 #include "store.h"
+#include "engine.h"
 
 int actualInterface = 0;
 
@@ -241,7 +242,9 @@ void approve() {
       addNewDate(tmpTime);
 
       drawSuccessfulOpenInterface();
-			wait(5000);      
+			startEngine();
+			wait(5000);   
+			stopEngine();
       funcF();
     }else {
       drawWrongCodeOpenInterface();
