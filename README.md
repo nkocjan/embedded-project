@@ -1,6 +1,6 @@
 # embedded-project
 
-## Bartosz Obrochta, Nikodem Kocjan
+## Bartłomiej Obrochta, Nikodem Kocjan
 
 ### Project objective
 
