@@ -6,7 +6,9 @@
 #include <stdbool.h>
 #include <math.h>
 #include "lcd.h"
+#include "rtc.h"
 #include "app.h"
+#include "handlers.h"
 #include "store.h"
 
 int actualInterface = 0;
@@ -19,6 +21,35 @@ int newDateTabId = 0;
 
 // Temporary items
 int aktualnyKod[4] = {0,0,0,0};
+
+void resetCodeTab(){
+  for(int i = 0; i < 4; i++){
+    codeTab[i]=-1;
+  }
+  codeTabId = 0;
+}
+
+void resetDateTab(){
+  for(int i = 0; i < 12; i++){
+		newDateTab[i] = -1;
+	};
+  newDateTabId = 0;
+}
+
+int validateCode(){
+	
+  getCode(aktualnyKod);
+	
+	char tmp[10];
+	sprintf(tmp,"code: %d%d%d%d",aktualnyKod[0],aktualnyKod[1],aktualnyKod[2],aktualnyKod[3]);
+	UART_SEND(tmp,11);
+  for(int i = 0; i < 4; i++){
+    if(codeTab[i] != aktualnyKod[i]){
+      return 0;
+    }
+  }
+  return 1;
+}
 
 // Ostatnie otwarcia
 void drawLastOpenDates() {
@@ -36,9 +67,9 @@ void drawLastOpenDates() {
   drawString(40, 230, dateBuf);
   decodeDateTime(lastOpenDates[3], dateBuf);
   drawString(40, 245, dateBuf);
-
+}
 // Rysowanie gwiazdki do kodu
-void drawStar(int x, int y, int position) {
+void drawStar(int x, int y, int position){
   x = x + position * 40;
   drawLine(x - 10, y - 10, x + 10, y + 10);
   drawLine(x + 10, y - 10, x - 10, y + 10);
@@ -188,9 +219,16 @@ void setNewDateInterfaceSuccessful() {
   drawString(40, 40, "Poprawnie zapisano nową datę");
 }
 
+void funcF() {
+  resetCodeTab();
+  resetDateTab();
+  actualInterface = 0;
+  drawBasicInterface();
+}
+
 // Wywołanie klawisza A
 void approve() {
-  if (actualInterface == 0 && codeTabId == 3) {
+  if (actualInterface == 0 && codeTabId == 4) {
     if(validateCode()){
 
       int _year = get_year();
@@ -203,19 +241,23 @@ void approve() {
       addNewDate(tmpTime);
 
       drawSuccessfulOpenInterface();
-      // TODO DOODAĆ PRZERWĘ 5 SEC
-      
+			wait(5000);      
       funcF();
     }else {
       drawWrongCodeOpenInterface();
     }
 		
-  } else if (actualInterface == 1 && codeTabId == 3) {
+  } else if (actualInterface == 1 && codeTabId == 4) {
+		char tmp[10];
+		sprintf(tmp,"code: %d%d%d%d",codeTab[0],codeTab[1],codeTab[2],codeTab[3]);
+		UART_SEND(tmp,11);
     setCode(codeTab);
     getCode(aktualnyKod);
     setNewCodeSuccessfulInterface();
     resetCodeTab();
     resetDateTab();
+		wait(5000);
+		funcF();
   } else if (actualInterface == 2 && newDateTabId == 12) {
 		int _year = newDateTab[0] * 1000 + newDateTab[1]*100 + newDateTab[2] * 10 + newDateTab[3] * 1;
 		int _month = newDateTab[4] * 10 + newDateTab[5] * 1;
@@ -242,19 +284,28 @@ void approve() {
 }
 
 void func(int value) {
+	
+	
   if (codeTabId > 3) {
     resetCodeTab();
-
-  } else if (codeTabId == 3 && (actualInterface == 0 || actualInterface == 1)) {
+		funcF();
+  } else if (actualInterface == 0 || actualInterface == 1) {
     drawStar(60, 100, codeTabId);
     codeTab[codeTabId] = value;
     codeTabId++;
 
   } else if (actualInterface == 2) {
-    int baseX = 40 + (newDateTabId % 2) * 30;
-    int baseY = 48 + ((newDateTabId / 2) % 5) * 50;
-
-    drawString(baseX, baseY, (char[2]){value + '0', '\0'});
+    if (newDateTabId < 4) {
+      drawString(40 + newDateTabId * 30, 48, (char[2]){value + '0', '\0'});
+    } else if (newDateTabId == 4 || newDateTabId == 5) {
+      drawString(40 + (newDateTabId - 4) * 30, 98, (char[2]){value + '0', '\0'});
+    } else if (newDateTabId == 6 || newDateTabId == 7) {
+      drawString(40 + (newDateTabId - 6) * 30, 148, (char[2]){value + '0', '\0'});
+    } else if (newDateTabId == 8 || newDateTabId == 9) {
+      drawString(40 + (newDateTabId - 8) * 30, 198, (char[2]){value + '0', '\0'});
+    } else if (newDateTabId == 10 || newDateTabId == 11) {
+      drawString(40 + (newDateTabId - 10) * 30, 248, (char[2]){value + '0', '\0'});
+    }
 
     if (newDateTabId <= 11) {
       newDateTab[newDateTabId] = value;
@@ -278,12 +329,7 @@ void funcC() {
 }
 void funcD() {}
 void funcE() {}
-void funcF() {
-  resetCodeTab();
-  resetDateTab();
-  actualInterface = 0;
-  drawBasicInterface();
-}
+
 
 void processInput(char str) {
   switch (str) {
@@ -356,28 +402,8 @@ void processInput(char str) {
   }
 }
 
-void resetCodeTab(){
-  for(int i = 0; i < 4; i++){
-    codeTab[i]=-1;
-  }
-  codeTabId = 0;
-}
 
-void resetDateTab(){
-  for(int i = 0; i < 12; i++){
-		newDateTab[i] = -1;
-	};
-  newDateTabId = 0;
-}
 
-int validateCode(){
-  getCode(aktualnyKod);
-  for(int i = 0; i < 4; i++){
-    if(codeTab[i] != aktualnyKod[i]){
-      return 0;
-    }
-  }
-  return 1;
-}
+
 
 #endif

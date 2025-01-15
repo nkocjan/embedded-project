@@ -65,7 +65,6 @@ void drawLetter(int _x, int _y, const char letter) {
 void drawString(int x, int y, const char *wsk) {
   int iter = 0;
   while (*wsk) {
-    Point p2;
 		int x2;
 		int y2;
     x2 = x + iter * 8;
