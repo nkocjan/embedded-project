@@ -5,6 +5,7 @@
 #include "app.h"
 #include "asciiLib.h"
 #include "handlers.h"
+#include "engine.h"
 #include "interface.h"
 #include "keyboard.h"
 #include "lcd.h"
@@ -22,6 +23,7 @@ void initialize() {
   initializeKeyboard();
   initRTC();
 	drawBasicInterface();
+	initiEngine();
 }
 
 int main(void) {
